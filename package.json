@@ -1,0 +1,29 @@
+{
+  "name": "aivico",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "server": "node server/index.js"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "latest",
+    "canvas-confetti": "^1.9.4",
+    "dotenv": "^18.0.3",
+    "express": "latest",
+    "lucide-react": "^1.47.0",
+    "nodemailer": "^10.0.10",
+    "react": "latest",
+    "react-dom": "latest",
+    "typescript": "latest",
+    "vite": "latest"
+  },
+  "devDependencies": {
+    "@types/canvas-confetti": "^1.9.0",
+    "@types/react": "latest",
+    "@types/react-dom": "latest"
+  }
+}
