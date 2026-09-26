@@ -1974,6 +1974,10 @@ pre, code, .preview-code-block {
     grid-template-columns: 1fr;
   }
 
+  .team-img {
+    height: 240px;
+  }
+
   .contact-form {
     grid-template-columns: 1fr;
   }
@@ -1986,6 +1990,10 @@ pre, code, .preview-code-block {
 /* -------------------------------------------------
    Team Row Layout & Stagger Styles
    ------------------------------------------------- */
+.leadership-page {
+  padding-top: var(--nav-height);
+}
+
 .team-row {
   padding: 48px 0;
   background: var(--bg-section);
@@ -1999,7 +2007,9 @@ pre, code, .preview-code-block {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 32px;
-  align-items: start;
+  max-width: 820px;
+  margin: 0 auto;
+  align-items: stretch;
 }
 
 .team-member {
@@ -2010,6 +2020,11 @@ pre, code, .preview-code-block {
   overflow: hidden;
   box-shadow: var(--shadow-elevated);
   transition: transform 0.35s var(--ease-out), box-shadow 0.35s var(--ease-out), border-color 0.25s ease;
+  width: 100%;
+  max-width: 360px;
+  justify-self: center;
+  display: flex;
+  flex-direction: column;
 }
 .team-member:hover {
   transform: translateY(-6px) scale(1.02);
@@ -2020,9 +2035,8 @@ pre, code, .preview-code-block {
 .team-img {
   width: 100%;
   max-width: 100%;
-  aspect-ratio: 242 / 481;
-  object-fit: contain;
-  height: auto;
+  height: 280px;
+  object-fit: cover;
   display: block;
   margin: 0 auto;
   border-radius: 8px;
@@ -2034,6 +2048,7 @@ pre, code, .preview-code-block {
 
 .team-caption {
   padding: 20px 24px;
+  flex: 1;
 }
 .team-caption h3 {
   margin: 0 0 4px;

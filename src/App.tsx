@@ -222,6 +222,87 @@ const faqs = [
   },
 ];
 
+function SiteFooter() {
+  return (
+    <footer className="site-footer">
+      <div className="section-wrapper">
+        <div className="footer-top">
+          <div className="footer-brand">
+            <a href="/" className="brand-logo">
+              <span className="brand-icon">A</span>
+              <span>AIVICO</span>
+              <span className="dot">.</span>
+            </a>
+            <p>
+              Professional software engineering studio specializing in Web Development, AI Products, SEO, SQA, Digital Marketing, and AI/ML Ops.
+            </p>
+          </div>
+
+          <div className="footer-col">
+            <h4>Explore</h4>
+            <ul>
+              <li><a href="/#technologies">Technology Universe</a></li>
+              <li><a href="/#impact">Case Studies</a></li>
+              <li><a href="/#process">Five-Step Process</a></li>
+              <li><a href="/#faq">FAQ</a></li>
+            </ul>
+          </div>
+
+          <div className="footer-col">
+            <h4>Contact</h4>
+            <ul>
+              <li><a href="mailto:hello@aivico.com" className="footer-email-link">hello@aivico.com ↗</a></li>
+              <li><span style={{ color: 'var(--text-dim)', fontSize: '13px' }}>NASTP (National Aerospace Science and Technology Park) <br /> Delta-4, Office 4030, Abid Majeed Road <br /> Lahore Cantt, Pakistan</span></li>
+              <li><a href="/#contact" style={{ color: 'var(--accent-primary)', fontWeight: 600 }}>Start Project ↗</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="footer-bottom">
+          <span>© {new Date().getFullYear()} Aivico Technologies Inc. All rights reserved.</span>
+          <div className="footer-social-links">
+            <a href="https://github.com" target="_blank" rel="noreferrer">GitHub</a>
+            <a href="https://linkedin.com" target="_blank" rel="noreferrer">LinkedIn</a>
+            <a href="https://x.com" target="_blank" rel="noreferrer">X</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+function LeadershipPage() {
+  return (
+    <>
+      <header className="site-header scrolled">
+        <div className="header-container">
+          <a href="/" className="brand-logo" aria-label="Aivico Home">
+            <span className="brand-icon">A</span>
+            <span>AIVICO</span>
+            <span className="dot">.</span>
+          </a>
+
+          <nav className="desktop-nav" aria-label="Main Navigation">
+            <a href="/">Home</a>
+            <a href="/leadership" aria-current="page">Leadership</a>
+          </nav>
+
+          <a href="/" className="btn-nav-cta">
+            <span>Back to Home</span>
+            <ArrowUpRight size={14} />
+          </a>
+        </div>
+      </header>
+
+      <main id="top" className="leadership-page">
+        <TeamRow />
+      </main>
+
+      <SiteFooter />
+    </>
+  );
+}
+
 export default function App() {
   // Lazy initializer reads localStorage synchronously — no flash on refresh
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
@@ -319,6 +400,10 @@ export default function App() {
     }
   };
 
+  if (window.location.pathname === '/leadership') {
+    return <LeadershipPage />;
+  }
+
   const currentService = serviceCatalog[activeService];
 
   return (
@@ -338,6 +423,7 @@ export default function App() {
             <a href="#impact">Case Studies</a>
             <a href="#process">Process</a>
             <a href="#faq">FAQ</a>
+            <a href="/leadership">Leadership</a>
           </nav>
 
           <div className="header-actions">
@@ -374,6 +460,7 @@ export default function App() {
         <a href="#impact" onClick={() => setMobileMenuOpen(false)}>Case Studies</a>
         <a href="#process" onClick={() => setMobileMenuOpen(false)}>Process</a>
         <a href="#faq" onClick={() => setMobileMenuOpen(false)}>FAQ</a>
+        <a href="/leadership" onClick={() => setMobileMenuOpen(false)}>Leadership</a>
         <a href="#contact" onClick={() => setMobileMenuOpen(false)} style={{ color: 'var(--accent-primary)' }}>
           Start a Project ↗
         </a>
@@ -415,24 +502,6 @@ export default function App() {
             </div>
           </div>
         </section>
-
-        {/* Creston-inspired continuous sliding marquee banner */}
-        <div className="marquee-container" aria-hidden="true">
-          <div className="marquee-track">
-            <div className="marquee-item">Web Development <span className="marquee-dot" /></div>
-            <div className="marquee-item">AI Product Development <span className="marquee-dot" /></div>
-            <div className="marquee-item">Technical SEO <span className="marquee-dot" /></div>
-            <div className="marquee-item">SQA Automation <span className="marquee-dot" /></div>
-            <div className="marquee-item">Digital Marketing <span className="marquee-dot" /></div>
-            <div className="marquee-item">AI/ML Ops <span className="marquee-dot" /></div>
-            <div className="marquee-item">Web Development <span className="marquee-dot" /></div>
-            <div className="marquee-item">AI Product Development <span className="marquee-dot" /></div>
-            <div className="marquee-item">Technical SEO <span className="marquee-dot" /></div>
-            <div className="marquee-item">SQA Automation <span className="marquee-dot" /></div>
-            <div className="marquee-item">Digital Marketing <span className="marquee-dot" /></div>
-            <div className="marquee-item">AI/ML Ops <span className="marquee-dot" /></div>
-          </div>
-        </div>
 
         {/* Exact 6 Core Services with Smooth Sliding Preview */}
         <section id="services" className="content-section reveal-on-scroll">
@@ -516,6 +585,24 @@ export default function App() {
             </div>
           </div>
         </section>
+
+         {/* Creston-inspired continuous sliding marquee banner */}
+        <div className="marquee-container" aria-hidden="true">
+          <div className="marquee-track">
+            <div className="marquee-item">Web Development <span className="marquee-dot" /></div>
+            <div className="marquee-item">AI Product Development <span className="marquee-dot" /></div>
+            <div className="marquee-item">Technical SEO <span className="marquee-dot" /></div>
+            <div className="marquee-item">SQA Automation <span className="marquee-dot" /></div>
+            <div className="marquee-item">Digital Marketing <span className="marquee-dot" /></div>
+            <div className="marquee-item">AI/ML Ops <span className="marquee-dot" /></div>
+            <div className="marquee-item">Web Development <span className="marquee-dot" /></div>
+            <div className="marquee-item">AI Product Development <span className="marquee-dot" /></div>
+            <div className="marquee-item">Technical SEO <span className="marquee-dot" /></div>
+            <div className="marquee-item">SQA Automation <span className="marquee-dot" /></div>
+            <div className="marquee-item">Digital Marketing <span className="marquee-dot" /></div>
+            <div className="marquee-item">AI/ML Ops <span className="marquee-dot" /></div>
+          </div>
+        </div>
 
         {/* Technology Universe // 02 (Filtered by the 6 Services) */}
         <section id="technologies" className="content-section reveal-on-scroll" style={{ background: 'var(--bg-secondary)' }}>
@@ -766,8 +853,6 @@ export default function App() {
   <footer className="site-footer">
     {/* …existing footer code… */}
   </footer>
-  {/* NEW: Leadership row */}
-  <TeamRow />
 
       {/* Footer */}
       <footer className="site-footer">

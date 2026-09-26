@@ -12,15 +12,19 @@ export const TeamRow: React.FC = () => {
           {/* Replace the placeholder with your own image */}
           <img
             src="https://crestonbiz.com/_next/image?url=%2Fimages%2Ffounders%2Fali-nauman-gilani.jpg&w=256&q=75&dpl=dpl_5b7wFA6BMfZXPbPncz42enLTpUAd"
-            alt="Portrait of Jane Doe – Co‑founder & Chief Technology Officer"
+            alt="Syed Ali Nauman Gilani – Founding Member & Director"
             className="team-img"
           />
           <figcaption className="team-caption">
             <h3>Syed Ali Nauman Gilani</h3>
-            <p className="team-role">Co‑founder &amp; CTO</p>
+            <p className="team-role">Founding Member & Director</p>
             <p className="team-bio">
-              Passionate about scalable AI systems, Jane leads the
-              engineering team and drives the core technology roadmap.
+              Award-winning entrepreneur, Founder & CEO of Skill2Success 
+              and Founder of AIVICO Tech, with a strong focus on technology, 
+              innovation, education and business development. As a founding member 
+              and director of Creston Business Services, he brings an entrepreneurial 
+              and technology-driven perspective to the organisation, supporting strategic 
+              growth, institutional partnerships and the development of innovative business solutions.
             </p>
           </figcaption>
         </figure>
@@ -30,15 +34,20 @@ export const TeamRow: React.FC = () => {
           {/* Replace the placeholder with your own image */}
           <img
             src="https://crestonbiz.com/_next/image?url=%2Fimages%2Ffounders%2Fzarmina-sanam.jpg&w=256&q=75&dpl=dpl_5b7wFA6BMfZXPbPncz42enLTpUAd"
-            alt="Portrait of John Smith – Founder & Chief Executive Officer"
+            alt="Zarmina Sanam Founding Member & Managing Director
+"
             className="team-img"
           />
           <figcaption className="team-caption">
             <h3>Zarmina Sanam</h3>
-            <p className="team-role">Founder &amp; CEO</p>
+            <p className="team-role">Founding Member & Managing Director</p>
             <p className="team-bio">
-              With 15 years of SaaS leadership, John steers strategy,
-              growth, and client success across all service lines.
+             Award-winning entrepreneur, business growth professional, corporate trainer 
+             and startup mentor with 18+ years of experience across Telecom, FinTech, Social Learning
+              and EdTech. Founder and entrepreneur with expertise spanning business development, corporate training, 
+              entrepreneurship, technology and strategic partnerships. As a Founding Member & Director at Creston Business Services, 
+              she contributes to business growth, corporate events, conferences, workshops, training programmes, client engagement 
+              and strategic partnerships, complementing Creston's integrated facilities, events and workplace operations model.
             </p>
           </figcaption>
         </figure>
