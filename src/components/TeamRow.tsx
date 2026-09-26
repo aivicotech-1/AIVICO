@@ -1,5 +1,7 @@
 // src/components/TeamRow.tsx
 import React from "react";
+import noumanImage from '../images/nouman.png';
+import zarminaImage from '../images/Zarmina.png';
 
 export const TeamRow: React.FC = () => {
   return (
@@ -11,7 +13,7 @@ export const TeamRow: React.FC = () => {
         <figure className="team-member stagger-item">
           {/* Replace the placeholder with your own image */}
           <img
-            src="./src/images/nouman.png"
+            src={noumanImage}
             alt="Syed Ali Nauman Gilani – Founding Member & Director"
             className="team-img"
           />
@@ -33,8 +35,8 @@ export const TeamRow: React.FC = () => {
         <figure className="team-member stagger-item">
           {/* Replace the placeholder with your own image */}
           <img
-            src="./src/images/Zarmina.png"
-            alt="Zarmina Sanam Founding Member & Managing Director
+            src={zarminaImage}
+            alt="Zarmina Sanam- Founding Member & Managing Director
 "
             className="team-img"
           />
