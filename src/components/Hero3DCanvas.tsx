@@ -54,13 +54,12 @@ export function Hero3DCanvas({ theme = 'dark' }: Hero3DCanvasProps) {
 
     const isDark = theme === 'dark';
 
-    // In Light mode: High-contrast rich bronze & sepia tones on tinted porcelain
-    // In Dark mode: Luminous warm champagne on deep velvet
-    const mainNodeColor = isDark ? '#d8bc8a' : '#573f1d';
-    const highlightNodeColor = isDark ? '#fbf0dc' : '#875d27';
-    const lineColor = isDark ? 'rgba(216, 188, 138, ' : 'rgba(87, 63, 29, ';
-    const packetColor = isDark ? '#ffffff' : '#30200a';
-    const orbitRingColor = isDark ? 'rgba(216, 188, 138, 0.1)' : 'rgba(87, 63, 29, 0.18)';
+    // Graphite and jade technology palette with high contrast in both themes.
+    const mainNodeColor = isDark ? '#34d399' : '#047857';
+    const highlightNodeColor = isDark ? '#a7f3d0' : '#10b981';
+    const lineColor = isDark ? 'rgba(52, 211, 153, ' : 'rgba(4, 120, 87, ';
+    const packetColor = isDark ? '#ffffff' : '#12251f';
+    const orbitRingColor = isDark ? 'rgba(52, 211, 153, 0.12)' : 'rgba(4, 120, 87, 0.18)';
 
     // 38 3D spatial points
     const nodeCount = 38;
@@ -109,14 +108,14 @@ export function Hero3DCanvas({ theme = 'dark' }: Hero3DCanvasProps) {
       // Dedicated backdrop fill to ensure perfect contrast in both light and dark modes
       if (isDark) {
         const bgGrad = ctx.createRadialGradient(width / 2, height / 2, 50, width / 2, height / 2, Math.max(width, height) / 1.5);
-        bgGrad.addColorStop(0, '#131720');
-        bgGrad.addColorStop(1, '#0b0d10');
+        bgGrad.addColorStop(0, '#19302a');
+        bgGrad.addColorStop(1, '#0d1715');
         ctx.fillStyle = bgGrad;
       } else {
-        // Warm porcelain parchment gradient for light mode
+        // Cool white gradient for light mode
         const bgGrad = ctx.createRadialGradient(width / 2, height / 2, 60, width / 2, height / 2, Math.max(width, height) / 1.4);
-        bgGrad.addColorStop(0, '#f2ece0');
-        bgGrad.addColorStop(1, '#e6dfd1');
+        bgGrad.addColorStop(0, '#f3f8f5');
+        bgGrad.addColorStop(1, '#d9eae2');
         ctx.fillStyle = bgGrad;
       }
       ctx.fillRect(0, 0, width, height);
@@ -239,7 +238,7 @@ export function Hero3DCanvas({ theme = 'dark' }: Hero3DCanvasProps) {
           ctx.arc(curX, curY, Math.max(1.8, 2.8 * pktScale), 0, Math.PI * 2);
           ctx.fillStyle = packetColor;
           if (isDark) {
-            ctx.shadowColor = '#d8bc8a';
+            ctx.shadowColor = '#34d399';
             ctx.shadowBlur = 6;
           }
           ctx.fill();

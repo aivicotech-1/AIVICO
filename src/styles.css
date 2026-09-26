@@ -1,6 +1,6 @@
 /* ==========================================================================
    AIVICO ENTERPRISE DESIGN SYSTEM
-   Luxury Quiet-Tech Aesthetics: Warm Champagne, Platinum & Deep Obsidian
+  Professional Product-Tech Aesthetics: Graphite, Jade & Cool Mint
    Smooth Sliding Animations & Precise Light/Dark Spatial Architecture
    ========================================================================== */
 
@@ -8,37 +8,36 @@
   /* Global smooth scrolling */
   scroll-behavior: smooth;
 
-  /* Dark Mode: Deep Velvet Obsidian & Warm Champagne */
-  --bg-primary: #0b0d10;
-  --bg-secondary: #111419;
-  --bg-tertiary: #171b22;
-  --bg-card: rgba(20, 24, 31, 0.72);
-  --bg-card-hover: rgba(26, 32, 42, 0.88);
-  --bg-glass: rgba(11, 13, 16, 0.78);
+  /* Dark Mode: Graphite surfaces with jade and mint accents */
+  --bg-primary: #0d1715;
+  --bg-secondary: #12211e;
+  --bg-tertiary: #19302a;
+  --bg-card: rgba(18, 38, 33, 0.84);
+  --bg-card-hover: rgba(25, 52, 45, 0.94);
+  --bg-glass: rgba(13, 23, 21, 0.84);
 
   --border-subtle: rgba(255, 255, 255, 0.07);
   --border-strong: rgba(255, 255, 255, 0.13);
-  --border-active: rgba(216, 188, 138, 0.45);
-  --border-glow: rgba(216, 188, 138, 0.25);
+  --border-active: rgba(52, 211, 153, 0.55);
+  --border-glow: rgba(52, 211, 153, 0.28);
 
-  --text-main: #f7f6f2;
-  --text-muted: #9ba1a6;
-  --text-dim: #6b7280;
-  --text-inverse: #0b0d10;
+  --text-main: #f1f8f4;
+  --text-muted: #a7beb4;
+  --text-dim: #718c81;
+  --text-inverse: #0b1714;
 
-  /* Luxury Champagne & Soft Platinum Accents (No generic AI blue) */
-  --accent-primary: #d8bc8a;
-  --accent-light: #f5e6cc;
-  --accent-deep: #b38d4f;
-  --accent-emerald: #10b981;
+  --accent-primary: #34d399;
+  --accent-light: #a7f3d0;
+  --accent-deep: #059669;
+  --accent-emerald: #2dd4bf;
 
-  --gradient-brand: linear-gradient(135deg, #f5e6cc 0%, #d8bc8a 50%, #b38d4f 100%);
-  --gradient-subtle: linear-gradient(180deg, rgba(216, 188, 138, 0.08) 0%, transparent 100%);
+  --gradient-brand: linear-gradient(135deg, #a7f3d0 0%, #34d399 48%, #0f766e 100%);
+  --gradient-subtle: linear-gradient(180deg, rgba(52, 211, 153, 0.11) 0%, transparent 100%);
 
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
   --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.4);
   --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.6);
-  --shadow-glow: 0 0 30px rgba(216, 188, 138, 0.15);
+  --shadow-glow: 0 0 30px rgba(52, 211, 153, 0.18);
   --blur-glass: blur(18px);
 
   --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
@@ -50,36 +49,36 @@
 }
 
 html[data-theme='light'] {
-  /* Light Mode: Warm Alabaster Linen & Deep Champagne Bronze */
-  --bg-primary: #faf9f5;
-  --bg-secondary: #f3efe6;
-  --bg-tertiary: #ebe5d8;
-  --bg-card: rgba(255, 255, 255, 0.88);
+  /* Light Mode: Cool white surfaces with clean jade structure */
+  --bg-primary: #f3f8f5;
+  --bg-secondary: #e8f2ed;
+  --bg-tertiary: #d9eae2;
+  --bg-card: rgba(255, 255, 255, 0.92);
   --bg-card-hover: rgba(255, 255, 255, 0.98);
-  --bg-glass: rgba(250, 249, 245, 0.88);
+  --bg-glass: rgba(243, 248, 245, 0.9);
 
   --border-subtle: rgba(24, 25, 27, 0.08);
   --border-strong: rgba(24, 25, 27, 0.15);
-  --border-active: rgba(140, 109, 59, 0.45);
-  --border-glow: rgba(140, 109, 59, 0.18);
+  --border-active: rgba(4, 120, 87, 0.42);
+  --border-glow: rgba(4, 120, 87, 0.2);
 
-  --text-main: #18191b;
-  --text-muted: #525866;
-  --text-dim: #8c93a0;
-  --text-inverse: #faf9f5;
+  --text-main: #12251f;
+  --text-muted: #526c61;
+  --text-dim: #7c968a;
+  --text-inverse: #f3f8f5;
 
-  --accent-primary: #8c6d3b;
-  --accent-light: #b38d4f;
-  --accent-deep: #5e4620;
-  --accent-emerald: #059669;
+  --accent-primary: #047857;
+  --accent-light: #059669;
+  --accent-deep: #065f46;
+  --accent-emerald: #0f766e;
 
-  --gradient-brand: linear-gradient(135deg, #a3824c 0%, #8c6d3b 50%, #5e4620 100%);
-  --gradient-subtle: linear-gradient(180deg, rgba(140, 109, 59, 0.08) 0%, transparent 100%);
+  --gradient-brand: linear-gradient(135deg, #10b981 0%, #047857 52%, #064e3b 100%);
+  --gradient-subtle: linear-gradient(180deg, rgba(4, 120, 87, 0.09) 0%, transparent 100%);
 
   --shadow-sm: 0 2px 8px rgba(24, 25, 27, 0.04);
   --shadow-md: 0 8px 24px rgba(24, 25, 27, 0.06);
   --shadow-lg: 0 20px 45px rgba(24, 25, 27, 0.09);
-  --shadow-glow: 0 0 30px rgba(140, 109, 59, 0.1);
+  --shadow-glow: 0 0 30px rgba(4, 120, 87, 0.13);
 
   color-scheme: light;
 }
@@ -121,8 +120,8 @@ body::before {
   position: fixed;
   inset: 0;
   background-image: 
-    radial-gradient(at 15% 15%, rgba(216, 188, 138, 0.05) 0px, transparent 55%),
-    radial-gradient(at 85% 80%, rgba(216, 188, 138, 0.04) 0px, transparent 55%);
+    radial-gradient(at 15% 15%, rgba(52, 211, 153, 0.07) 0px, transparent 55%),
+    radial-gradient(at 85% 80%, rgba(20, 184, 166, 0.05) 0px, transparent 55%);
   pointer-events: none;
   z-index: 0;
 }
@@ -588,11 +587,32 @@ section.hero-section {
 
 .hero-title {
   font-size: clamp(38px, 4.2vw, 62px);
-  line-height: 1.1;
+  line-height: 1.22;
   font-weight: 800;
   letter-spacing: -0.035em;
   margin-bottom: 20px;
+  padding-bottom: 0.12em;
   color: var(--text-main);
+}
+
+.hero-tagline {
+  color: var(--accent-primary);
+  font-size: clamp(18px, 1.8vw, 24px);
+  font-weight: 700;
+  line-height: 1.35;
+  margin: -6px 0 14px;
+  animation: taglineReveal 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes taglineReveal {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .hero-subtitle {
@@ -625,24 +645,24 @@ section.hero-section {
   width: 100%;
   height: 100%;
   border-radius: 20px;
-  background: #0d1015;
+  background: #10231e;
   border: 1px solid var(--border-strong);
   overflow: hidden;
-  box-shadow: var(--shadow-md), 0 0 40px rgba(216, 188, 138, 0.06);
+  box-shadow: var(--shadow-md), 0 0 40px rgba(52, 211, 153, 0.08);
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .hero-3d-container:hover {
   border-color: var(--border-active);
-  box-shadow: var(--shadow-lg), 0 0 60px rgba(216, 188, 138, 0.1);
+  box-shadow: var(--shadow-lg), 0 0 60px rgba(52, 211, 153, 0.14);
 }
 
 /* Light mode: canvas draws its own background via ctx.fillRect — 
    keep container transparent so no colour mismatch during first frame paint */
 html[data-theme='light'] .hero-3d-container {
-  background: #f2ece0;
-  border: 1px solid rgba(87, 63, 29, 0.22);
-  box-shadow: 0 12px 36px rgba(87, 63, 29, 0.12);
+  background: #e8f2ed;
+  border: 1px solid rgba(4, 120, 87, 0.22);
+  box-shadow: 0 12px 36px rgba(4, 120, 87, 0.12);
 }
 
 .hero-3d-canvas {
@@ -738,7 +758,7 @@ section.content-section {
   display: grid;
   grid-template-columns: 1fr 1.25fr;
   gap: 32px;
-  align-items: start;
+  align-items: stretch;
 }
 
 .services-nav-list {
@@ -758,6 +778,7 @@ section.content-section {
 }
 
 .service-card-btn {
+  position: relative;
   display: flex;
   align-items: flex-start;
   gap: 16px;
@@ -780,6 +801,23 @@ section.content-section {
   border-color: var(--border-active);
   background: var(--bg-card-hover);
   box-shadow: var(--shadow-sm);
+}
+
+@media (min-width: 1081px) {
+  .service-card-btn.active::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: -33px;
+    width: 32px;
+    height: 10px;
+    background:
+      radial-gradient(circle at 3px 50%, #059669 0 3px, transparent 3.5px),
+      radial-gradient(circle at calc(100% - 3px) 50%, #6ee7b7 0 3px, transparent 3.5px),
+      linear-gradient(#34d399, #34d399) center / 100% 2px no-repeat;
+    filter: drop-shadow(0 0 5px rgba(5, 150, 105, 0.85));
+    transform: translateY(-50%);
+  }
 }
 
 .service-index {
@@ -817,6 +855,11 @@ section.content-section {
 .service-preview-panel {
   position: sticky;
   top: 96px;
+  align-self: stretch;
+  height: 100%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
   border-radius: 16px;
   border: 1px solid var(--border-strong);
   background: var(--bg-card);
@@ -851,6 +894,7 @@ section.content-section {
 
 .preview-body {
   padding: 24px;
+  flex: 1;
 }
 
 .preview-category-tag {

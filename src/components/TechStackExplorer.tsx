@@ -189,7 +189,7 @@ const universeItems: TechItem[] = [
 export function TechStackExplorer() {
   const [activeCategory, setActiveCategory] = useState<
     'all' | 'web' | 'ai-product' | 'seo' | 'sqa' | 'marketing' | 'aiml-ops'
-  >('all');
+  >('web');
   const [searchQuery, setSearchQuery] = useState('');
 
   const categories = [

@@ -222,6 +222,12 @@ const faqs = [
   },
 ];
 
+const heroTaglines = [
+  'Build faster. Scale with confidence.',
+  'From ambitious ideas to reliable software.',
+  'Engineering digital products for what comes next.',
+];
+
 function SiteFooter() {
   return (
     <footer className="site-footer">
@@ -320,6 +326,7 @@ export default function App() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [selectedServiceChip, setSelectedServiceChip] = useState('Web Development');
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
+  const [heroTaglineIndex, setHeroTaglineIndex] = useState(0);
 
   // Sync data-theme attribute and persist whenever theme changes
   useEffect(() => {
@@ -334,6 +341,14 @@ export default function App() {
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const taglineTimer = window.setInterval(() => {
+      setHeroTaglineIndex((currentIndex) => (currentIndex + 1) % heroTaglines.length);
+    }, 4200);
+
+    return () => window.clearInterval(taglineTimer);
   }, []);
 
   // Scroll reveal observer — covers all reveal variants
@@ -386,7 +401,7 @@ export default function App() {
         particleCount: 80,
         spread: 70,
         origin: { y: 0.6 },
-        colors: ['#d8bc8a', '#f5e6cc', '#b38d4f', '#ffffff'],
+        colors: ['#34d399', '#a7f3d0', '#0f766e', '#ffffff'],
       });
       e.currentTarget.reset();
     } catch {
@@ -395,7 +410,7 @@ export default function App() {
         particleCount: 80,
         spread: 70,
         origin: { y: 0.6 },
-        colors: ['#d8bc8a', '#f5e6cc', '#b38d4f'],
+        colors: ['#34d399', '#a7f3d0', '#0f766e'],
       });
     }
   };
@@ -479,6 +494,10 @@ export default function App() {
               <h1 className="hero-title">
                 Digital products & <span className="text-gradient">intelligent software</span> engineered to scale.
               </h1>
+
+              <p className="hero-tagline" aria-live="polite" key={heroTaglineIndex}>
+                {heroTaglines[heroTaglineIndex]}
+              </p>
 
               <p className="hero-subtitle">
                 Aivico builds modern web applications, AI products, automated SQA systems, and high-impact digital growth campaigns.
