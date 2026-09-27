@@ -310,15 +310,7 @@ function LeadershipPage() {
 }
 
 export default function App() {
-  // Lazy initializer reads localStorage synchronously — no flash on refresh
-  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
-    try {
-      const saved = localStorage.getItem('aivico-theme');
-      return saved === 'light' ? 'light' : 'dark';
-    } catch {
-      return 'dark';
-    }
-  });
+  const [theme, setTheme] = useState<'light' | 'dark'>('dark');
   const [activeService, setActiveService] = useState(0);
   const [activeStep, setActiveStep] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -608,18 +600,22 @@ export default function App() {
          {/* Creston-inspired continuous sliding marquee banner */}
         <div className="marquee-container" aria-hidden="true">
           <div className="marquee-track">
-            <div className="marquee-item">Web Development <span className="marquee-dot" /></div>
-            <div className="marquee-item">AI Product Development <span className="marquee-dot" /></div>
-            <div className="marquee-item">Technical SEO <span className="marquee-dot" /></div>
-            <div className="marquee-item">SQA Automation <span className="marquee-dot" /></div>
-            <div className="marquee-item">Digital Marketing <span className="marquee-dot" /></div>
-            <div className="marquee-item">AI/ML Ops <span className="marquee-dot" /></div>
-            <div className="marquee-item">Web Development <span className="marquee-dot" /></div>
-            <div className="marquee-item">AI Product Development <span className="marquee-dot" /></div>
-            <div className="marquee-item">Technical SEO <span className="marquee-dot" /></div>
-            <div className="marquee-item">SQA Automation <span className="marquee-dot" /></div>
-            <div className="marquee-item">Digital Marketing <span className="marquee-dot" /></div>
-            <div className="marquee-item">AI/ML Ops <span className="marquee-dot" /></div>
+            <div className="marquee-group">
+              <div className="marquee-item"><Code2 className="marquee-icon" /><span className="marquee-dot" /></div>
+              <div className="marquee-item"><Cpu className="marquee-icon" /><span className="marquee-dot" /></div>
+              <div className="marquee-item"><Search className="marquee-icon" /><span className="marquee-dot" /></div>
+              <div className="marquee-item"><ShieldCheck className="marquee-icon" /><span className="marquee-dot" /></div>
+              <div className="marquee-item"><TrendingUp className="marquee-icon" /><span className="marquee-dot" /></div>
+              <div className="marquee-item"><Database className="marquee-icon" /><span className="marquee-dot" /></div>
+            </div>
+            <div className="marquee-group" aria-hidden="true">
+              <div className="marquee-item"><Code2 className="marquee-icon" /><span className="marquee-dot" /></div>
+              <div className="marquee-item"><Cpu className="marquee-icon" /><span className="marquee-dot" /></div>
+              <div className="marquee-item"><Search className="marquee-icon" /><span className="marquee-dot" /></div>
+              <div className="marquee-item"><ShieldCheck className="marquee-icon" /><span className="marquee-dot" /></div>
+              <div className="marquee-item"><TrendingUp className="marquee-icon" /><span className="marquee-dot" /></div>
+              <div className="marquee-item"><Database className="marquee-icon" /><span className="marquee-dot" /></div>
+            </div>
           </div>
         </div>
 

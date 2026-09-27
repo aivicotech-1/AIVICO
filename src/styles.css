@@ -176,9 +176,19 @@ input, textarea, select {
 .marquee-track {
   display: flex;
   align-items: center;
-  gap: 40px;
+  gap: 0;
   animation: smoothMarquee 32s linear infinite;
   will-change: transform;
+}
+
+.marquee-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 80vw;
+  max-width: none;
+  gap: 1px;
+  flex-shrink: 0;
 }
 
 .marquee-container:hover .marquee-track {
@@ -195,6 +205,14 @@ input, textarea, select {
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--text-muted);
+}
+
+.marquee-icon {
+  width: 22px;
+  height: 22px;
+  color: var(--accent-primary);
+  stroke-width: 1.7;
+  flex-shrink: 0;
 }
 
 .marquee-dot {
