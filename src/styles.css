@@ -616,6 +616,8 @@ section.hero-section {
   margin-bottom: 20px;
   padding-bottom: 0.12em;
   color: var(--text-main);
+  max-width: 100%;
+  overflow-wrap: anywhere;
 }
 
 .hero-title .hero-word {
@@ -2167,6 +2169,7 @@ pre, code, .preview-code-block {
     grid-template-columns: 1fr;
     gap: 36px;
     text-align: center;
+    min-width: 0;
   }
 
   .hero-content {
@@ -2185,7 +2188,8 @@ pre, code, .preview-code-block {
   }
 
   .hero-visual-wrapper {
-    height: 420px;
+    height: auto;
+    min-height: 430px;
   }
 
   .hero-services-panel {
@@ -2247,6 +2251,7 @@ pre, code, .preview-code-block {
 
   .hero-visual-wrapper {
     height: auto;
+    min-height: 0;
   }
 
   .hero-services-panel {
@@ -2422,7 +2427,8 @@ pre, code, .preview-code-block {
   }
 
   .hero-visual-wrapper {
-    height: 300px;
+    height: auto;
+    min-height: 0;
   }
 
   .contact-form-panel {
