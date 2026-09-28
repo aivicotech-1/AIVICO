@@ -310,7 +310,13 @@ function SiteFooter() {
   );
 }
 
-function LeadershipPage() {
+function LeadershipPage({
+  theme,
+  setTheme,
+}: {
+  theme: 'light' | 'dark';
+  setTheme: (theme: 'light' | 'dark') => void;
+}) {
   return (
     <>
       <header className="site-header scrolled">
@@ -326,10 +332,21 @@ function LeadershipPage() {
             <a href="/leadership" aria-current="page">Leadership</a>
           </nav>
 
-          <a href="/" className="btn-nav-cta">
-            <span>Back to Home</span>
-            <ArrowUpRight size={14} />
-          </a>
+          <div className="header-actions">
+            <button
+              type="button"
+              className="btn-theme-toggle"
+              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+              aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+            >
+              {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
+            </button>
+
+            <a href="/" className="btn-nav-cta">
+              <span>Back to Home</span>
+              <ArrowUpRight size={14} />
+            </a>
+          </div>
         </div>
       </header>
 
@@ -343,7 +360,13 @@ function LeadershipPage() {
 }
 
 export default function App() {
-  const [theme, setTheme] = useState<'light' | 'dark'>('dark');
+  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
+    try {
+      return localStorage.getItem('aivico-theme') === 'light' ? 'light' : 'dark';
+    } catch {
+      return 'dark';
+    }
+  });
   const [activeService, setActiveService] = useState(0);
   const [activeStep, setActiveStep] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -507,7 +530,7 @@ export default function App() {
   };
 
   if (window.location.pathname === '/leadership') {
-    return <LeadershipPage />;
+    return <LeadershipPage theme={theme} setTheme={setTheme} />;
   }
 
   const currentService = serviceCatalog[activeService];
