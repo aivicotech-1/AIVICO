@@ -1,6 +1,5 @@
-import { useEffect, useState, type FormEvent } from 'react';
+import { useEffect, useRef, useState, type FormEvent } from 'react';
 import confetti from 'canvas-confetti';
-import { Hero3DCanvas } from './components/Hero3DCanvas';
 import { TiltCard } from './components/TiltCard';
 import { TechStackExplorer } from './components/TechStackExplorer';
 import { TeamRow } from "./components/TeamRow";
@@ -228,6 +227,40 @@ const heroTaglines = [
   'Engineering digital products for what comes next.',
 ];
 
+const heroHeadings = [
+  {
+    before: 'Digital products &',
+    accent: 'intelligent software',
+    after: 'engineered to scale',
+  },
+  {
+    before: 'Next-generation digital solutions',
+    accent: 'built for enterprise scale',
+    after: '',
+  },
+  {
+    before: 'Intelligent software &',
+    accent: 'high-performance platforms',
+    after: 'built for impact',
+  },
+];
+
+const marqueeLogos = [
+  { name: 'Python', src: 'https://cdn.simpleicons.org/python/34d399' },
+  { name: 'Django', src: 'https://cdn.simpleicons.org/django/34d399' },
+  { name: 'Flask', src: 'https://cdn.simpleicons.org/flask/34d399' },
+  { name: 'FastAPI', src: 'https://cdn.simpleicons.org/fastapi/34d399' },
+  { name: 'JavaScript', src: 'https://cdn.simpleicons.org/javascript/34d399' },
+  { name: 'React', src: 'https://cdn.simpleicons.org/react/34d399' },
+  { name: 'Angular', src: 'https://cdn.simpleicons.org/angular/34d399' },
+  { name: 'Java', src: 'https://cdn.simpleicons.org/openjdk/34d399' },
+  { name: 'Spring', src: 'https://cdn.simpleicons.org/spring/34d399' },
+  { name: 'Docker', src: 'https://cdn.simpleicons.org/docker/34d399' },
+  { name: 'Next.js', src: 'https://cdn.simpleicons.org/nextdotjs/34d399' },
+  { name: 'AWS', src: 'https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/amazonaws.svg' },
+  { name: 'Vercel', src: 'https://cdn.simpleicons.org/vercel/34d399' },
+];
+
 function SiteFooter() {
   return (
     <footer className="site-footer">
@@ -319,6 +352,20 @@ export default function App() {
   const [selectedServiceChip, setSelectedServiceChip] = useState('Web Development');
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
   const [heroTaglineIndex, setHeroTaglineIndex] = useState(0);
+  const [heroHeadingIndex, setHeroHeadingIndex] = useState(0);
+  const [heroHeadingVisible, setHeroHeadingVisible] = useState(true);
+  const heroServicesPanelRef = useRef<HTMLDivElement>(null);
+  const activeHeroServiceTabRef = useRef<HTMLButtonElement>(null);
+  const heroServiceDetailRef = useRef<HTMLDivElement>(null);
+  const [heroConnector, setHeroConnector] = useState<{
+    width: number;
+    height: number;
+    path: string;
+    startX: number;
+    startY: number;
+    endX: number;
+    endY: number;
+  } | null>(null);
 
   // Sync data-theme attribute and persist whenever theme changes
   useEffect(() => {
@@ -336,11 +383,63 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    const taglineTimer = window.setInterval(() => {
-      setHeroTaglineIndex((currentIndex) => (currentIndex + 1) % heroTaglines.length);
+    const updateHeroConnector = () => {
+      const panel = heroServicesPanelRef.current;
+      const tab = activeHeroServiceTabRef.current;
+      const detail = heroServiceDetailRef.current;
+      if (!panel || !tab || !detail) return;
+
+      const panelRect = panel.getBoundingClientRect();
+      const tabRect = tab.getBoundingClientRect();
+      const detailRect = detail.getBoundingClientRect();
+      const startX = tabRect.right - panelRect.left;
+      const startY = tabRect.top + tabRect.height / 2 - panelRect.top;
+      const endX = detailRect.left - panelRect.left;
+      const endY = detailRect.top + detailRect.height / 2 - panelRect.top;
+      const curveOffset = Math.max(14, (endX - startX) * 0.45);
+
+      setHeroConnector({
+        width: panelRect.width,
+        height: panelRect.height,
+        path: `M${startX} ${startY} C${startX + curveOffset} ${startY}, ${endX - curveOffset} ${endY}, ${endX} ${endY}`,
+        startX,
+        startY,
+        endX,
+        endY,
+      });
+    };
+
+    const frame = window.requestAnimationFrame(updateHeroConnector);
+    window.addEventListener('resize', updateHeroConnector);
+    return () => {
+      window.cancelAnimationFrame(frame);
+      window.removeEventListener('resize', updateHeroConnector);
+    };
+  }, [activeService]);
+
+  useEffect(() => {
+    const serviceTimer = window.setInterval(() => {
+      setActiveService((currentIndex) => (currentIndex + 1) % serviceCatalog.length);
+    }, 5200);
+
+    return () => window.clearInterval(serviceTimer);
+  }, []);
+
+  useEffect(() => {
+    let headingSwapTimeout: number | null = null;
+    const headingTimer = window.setInterval(() => {
+      setHeroHeadingVisible(false);
+      headingSwapTimeout = window.setTimeout(() => {
+        setHeroHeadingIndex((currentIndex) => (currentIndex + 1) % heroHeadings.length);
+        setHeroTaglineIndex((currentIndex) => (currentIndex + 1) % heroTaglines.length);
+        setHeroHeadingVisible(true);
+      }, 520);
     }, 4200);
 
-    return () => window.clearInterval(taglineTimer);
+    return () => {
+      window.clearInterval(headingTimer);
+      if (headingSwapTimeout !== null) window.clearTimeout(headingSwapTimeout);
+    };
   }, []);
 
   // Scroll reveal observer — covers all reveal variants
@@ -480,19 +579,21 @@ export default function App() {
             <div className="hero-content">
               <div className="eyebrow-pill">
                 <Sparkles size={12} />
-                <span>Web Development • AI Product • SEO • SQA • Marketing • MLOps</span>
+                <span>Web Development • AI Product • SEO • SQA • Marketing • AI/ML Ops</span>
               </div>
 
-              <h1 className="hero-title">
-                Digital products & <span className="text-gradient">intelligent software</span> engineered to scale.
+              <h1 className={`hero-title ${heroHeadingVisible ? 'is-visible' : 'is-hidden'}`}>
+                <span className="hero-word">{heroHeadings[heroHeadingIndex].before}</span>{' '}
+                <span className="hero-word text-gradient">{heroHeadings[heroHeadingIndex].accent}</span>{' '}
+                <span className="hero-word">{heroHeadings[heroHeadingIndex].after}</span>
               </h1>
 
               <p className="hero-tagline" aria-live="polite" key={heroTaglineIndex}>
-                {heroTaglines[heroTaglineIndex]}
+                <span>{heroTaglines[heroTaglineIndex]}</span>
               </p>
 
               <p className="hero-subtitle">
-                Aivico builds modern web applications, AI products, automated SQA systems, and high-impact digital growth campaigns.
+                <span>Aivico builds modern web applications, AI products, automated SQA systems, and high-impact digital growth campaigns.</span>
               </p>
 
               <div className="hero-cta-group">
@@ -509,7 +610,53 @@ export default function App() {
             </div>
 
             <div className="hero-visual-wrapper">
-              <Hero3DCanvas theme={theme} />
+              <div className="hero-services-panel" ref={heroServicesPanelRef}>
+                <div className="hero-service-list" role="tablist" aria-label="Aivico services">
+                  <div className="hero-panel-kicker">CAPABILITY INDEX // 01</div>
+                  {serviceCatalog.map((service, index) => (
+                    <button
+                      key={service.id}
+                      type="button"
+                      role="tab"
+                      aria-selected={index === activeService}
+                      ref={index === activeService ? activeHeroServiceTabRef : undefined}
+                      className={`hero-service-tab ${index === activeService ? 'active' : ''}`}
+                      onClick={() => setActiveService(index)}
+                    >
+                      <span className="hero-service-tab-number">{service.num}</span>
+                      <span>{service.name}</span>
+                      <ArrowUpRight size={14} />
+                    </button>
+                  ))}
+                </div>
+
+                  {heroConnector && (
+                    <svg
+                      key={activeService}
+                      className="hero-service-connector"
+                      viewBox={`0 0 ${heroConnector.width} ${heroConnector.height}`}
+                      aria-hidden="true"
+                    >
+                      <path className="hero-service-connector-glow" d={heroConnector.path} />
+                      <path className="hero-service-connector-line" d={heroConnector.path} />
+                    </svg>
+                  )}
+
+                <div className="hero-service-detail" ref={heroServiceDetailRef} role="tabpanel">
+                  <span className="hero-panel-kicker">{currentService.category}</span>
+                  <h2>{currentService.name}</h2>
+                  <p>{currentService.fullDesc}</p>
+                  <div className="hero-service-features">
+                    {currentService.features.slice(0, 3).map((feature) => (
+                      <span key={feature}>{feature}</span>
+                    ))}
+                  </div>
+                  <span className="hero-service-status">
+                    <span className="hero-service-status-dot" />
+                    READY TO ENGINEER
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -601,20 +748,18 @@ export default function App() {
         <div className="marquee-container" aria-hidden="true">
           <div className="marquee-track">
             <div className="marquee-group">
-              <div className="marquee-item"><Code2 className="marquee-icon" /><span className="marquee-dot" /></div>
-              <div className="marquee-item"><Cpu className="marquee-icon" /><span className="marquee-dot" /></div>
-              <div className="marquee-item"><Search className="marquee-icon" /><span className="marquee-dot" /></div>
-              <div className="marquee-item"><ShieldCheck className="marquee-icon" /><span className="marquee-dot" /></div>
-              <div className="marquee-item"><TrendingUp className="marquee-icon" /><span className="marquee-dot" /></div>
-              <div className="marquee-item"><Database className="marquee-icon" /><span className="marquee-dot" /></div>
+              {marqueeLogos.map((logo) => (
+                <div className="marquee-item" key={logo.name}>
+                  <img className={`marquee-logo ${logo.name === 'AWS' ? 'marquee-logo-aws' : ''}`} src={logo.src} alt="" aria-hidden="true" />
+                </div>
+              ))}
             </div>
             <div className="marquee-group" aria-hidden="true">
-              <div className="marquee-item"><Code2 className="marquee-icon" /><span className="marquee-dot" /></div>
-              <div className="marquee-item"><Cpu className="marquee-icon" /><span className="marquee-dot" /></div>
-              <div className="marquee-item"><Search className="marquee-icon" /><span className="marquee-dot" /></div>
-              <div className="marquee-item"><ShieldCheck className="marquee-icon" /><span className="marquee-dot" /></div>
-              <div className="marquee-item"><TrendingUp className="marquee-icon" /><span className="marquee-dot" /></div>
-              <div className="marquee-item"><Database className="marquee-icon" /><span className="marquee-dot" /></div>
+              {marqueeLogos.map((logo) => (
+                <div className="marquee-item" key={logo.name}>
+                  <img className={`marquee-logo ${logo.name === 'AWS' ? 'marquee-logo-aws' : ''}`} src={logo.src} alt="" aria-hidden="true" />
+                </div>
+              ))}
             </div>
           </div>
         </div>
