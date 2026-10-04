@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { TiltCard } from './TiltCard';
 import { ArrowUpRight, TrendingUp, ShieldCheck, Zap, Code2, Search } from 'lucide-react';
 
 interface CaseStudy {
@@ -75,7 +74,7 @@ export function CaseStudies() {
         ))}
       </div>
 
-      <TiltCard className="case-study-showcase" maxTilt={4}>
+      <div className="case-study-showcase glass-panel">
         <div className="showcase-header">
           <div>
             <div className="showcase-badge">
@@ -86,7 +85,14 @@ export function CaseStudies() {
             <p className="showcase-subtitle">{current.subtitle}</p>
           </div>
           <div className="showcase-cta-wrap">
-            <a href="#contact" className="btn-secondary-link">
+            <a
+              href="#contact"
+              className="btn-secondary-link"
+              onClick={(event) => {
+                event.preventDefault();
+                document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }}
+            >
               <span>Discuss Similar Project</span>
               <ArrowUpRight size={14} />
             </a>
@@ -120,7 +126,7 @@ export function CaseStudies() {
             </span>
           ))}
         </div>
-      </TiltCard>
+      </div>
     </div>
   );
 }

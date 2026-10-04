@@ -4,6 +4,7 @@ import { TiltCard } from './components/TiltCard';
 import { TechStackExplorer } from './components/TechStackExplorer';
 import { TeamRow } from "./components/TeamRow";
 import { CaseStudies } from './components/CaseStudies';
+import aivicoTechLogo from './images/AivicoTechLogo.png';
 import {
   ArrowRight,
   ArrowUpRight,
@@ -90,7 +91,7 @@ const result = await copilot.run({ task: 'Analyze quarterly telemetry' });`,
     ],
     codePreview: `// Automated Schema & Structured Data Injection
 export const metadata = {
-  title: 'Enterprise AI & Web Studio | Aivico',
+  title: 'Enterprise AI & Web Studio | Aivico Tech',
   alternates: { canonical: 'https://aivico.com/' },
   openGraph: { type: 'website', locale: 'en_US' }
 };`,
@@ -204,7 +205,7 @@ const engineeringSteps = [
 
 const faqs = [
   {
-    q: 'What core services does Aivico provide?',
+    q: 'What core services does Aivico Tech provide?',
     a: 'We specialize strictly in 6 core disciplines: Web Development, AI Product Development, SEO, SQA (Software Quality Assurance), Digital Marketing, and AI/ML Ops.',
   },
   {
@@ -221,27 +222,14 @@ const faqs = [
   },
 ];
 
-const heroTaglines = [
-  'Build faster. Scale with confidence.',
-  'From ambitious ideas to reliable software.',
-  'Engineering digital products for what comes next.',
-];
-
 const heroHeadings = [
   {
-    before: 'Digital products &',
-    accent: 'intelligent software',
-    after: 'engineered to scale',
+    lineOne: 'Digital products &',
+    lineTwo: 'software built to scale',
   },
   {
-    before: 'Next-generation digital solutions',
-    accent: 'built for enterprise scale',
-    after: '',
-  },
-  {
-    before: 'Intelligent software &',
-    accent: 'high-performance platforms',
-    after: 'built for impact',
+    lineOne: 'Intelligent software &',
+    lineTwo: 'platforms built for impact',
   },
 ];
 
@@ -268,8 +256,7 @@ function SiteFooter() {
         <div className="footer-top">
           <div className="footer-brand">
             <a href="/" className="brand-logo">
-              <span className="brand-icon">A</span>
-              <span>AIVICO</span>
+              <img className="brand-logo-image" src={aivicoTechLogo} alt="Aivico Tech" />
               <span className="dot">.</span>
             </a>
             <p>
@@ -290,7 +277,7 @@ function SiteFooter() {
           <div className="footer-col">
             <h4>Contact</h4>
             <ul>
-              <li><a href="mailto:hello@aivico.com" className="footer-email-link">hello@aivico.com ↗</a></li>
+              <li><a href="mailto:hello@aivico.com?subject=Aivico%20Tech%20Project%20Inquiry" className="footer-email-link" aria-label="Email Aivico Tech">hello@aivico.com ↗</a></li>
               <li><span style={{ color: 'var(--text-dim)', fontSize: '13px' }}>NASTP (National Aerospace Science and Technology Park) <br /> Delta-4, Office 4030, Abid Majeed Road <br /> Lahore Cantt, Pakistan</span></li>
               <li><a href="/#contact" style={{ color: 'var(--accent-primary)', fontWeight: 600 }}>Start Project ↗</a></li>
             </ul>
@@ -298,7 +285,7 @@ function SiteFooter() {
         </div>
 
         <div className="footer-bottom">
-          <span>© {new Date().getFullYear()} Aivico Technologies Inc. All rights reserved.</span>
+          <span>© {new Date().getFullYear()} Aivico Tech. All rights reserved.</span>
           <div className="footer-social-links">
             <a href="https://github.com" target="_blank" rel="noreferrer">GitHub</a>
             <a href="https://linkedin.com" target="_blank" rel="noreferrer">LinkedIn</a>
@@ -321,10 +308,8 @@ function LeadershipPage({
     <>
       <header className="site-header scrolled">
         <div className="header-container">
-          <a href="/" className="brand-logo" aria-label="Aivico Home">
-            <span className="brand-icon">A</span>
-            <span>AIVICO</span>
-            <span className="dot">.</span>
+          <a href="/" className="brand-logo" aria-label="Aivico Tech Home">
+            <img className="brand-logo-image" src={aivicoTechLogo} alt="Aivico Tech" />
           </a>
 
           <nav className="desktop-nav" aria-label="Main Navigation">
@@ -374,7 +359,6 @@ export default function App() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [selectedServiceChip, setSelectedServiceChip] = useState('Web Development');
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
-  const [heroTaglineIndex, setHeroTaglineIndex] = useState(0);
   const [heroHeadingIndex, setHeroHeadingIndex] = useState(0);
   const [heroHeadingVisible, setHeroHeadingVisible] = useState(true);
   const heroServicesPanelRef = useRef<HTMLDivElement>(null);
@@ -454,7 +438,6 @@ export default function App() {
       setHeroHeadingVisible(false);
       headingSwapTimeout = window.setTimeout(() => {
         setHeroHeadingIndex((currentIndex) => (currentIndex + 1) % heroHeadings.length);
-        setHeroTaglineIndex((currentIndex) => (currentIndex + 1) % heroTaglines.length);
         setHeroHeadingVisible(true);
       }, 520);
     }, 4200);
@@ -540,10 +523,8 @@ export default function App() {
       {/* Navigation Header */}
       <header className={`site-header ${scrolled ? 'scrolled' : ''}`}>
         <div className="header-container">
-          <a href="#top" className="brand-logo" aria-label="Aivico Home">
-            <span className="brand-icon">A</span>
-            <span>AIVICO</span>
-            <span className="dot">.</span>
+          <a href="#top" className="brand-logo" aria-label="Aivico Tech Home">
+            <img className="brand-logo-image" src={aivicoTechLogo} alt="Aivico Tech" />
           </a>
 
           <nav className="desktop-nav" aria-label="Main Navigation">
@@ -606,17 +587,16 @@ export default function App() {
               </div>
 
               <h1 className={`hero-title ${heroHeadingVisible ? 'is-visible' : 'is-hidden'}`}>
-                <span className="hero-word">{heroHeadings[heroHeadingIndex].before}</span>{' '}
-                <span className="hero-word text-gradient">{heroHeadings[heroHeadingIndex].accent}</span>{' '}
-                <span className="hero-word">{heroHeadings[heroHeadingIndex].after}</span>
+                <span className="hero-word hero-line">{heroHeadings[heroHeadingIndex].lineOne}</span>
+                <span className="hero-word hero-line text-gradient">{heroHeadings[heroHeadingIndex].lineTwo}</span>
               </h1>
 
-              <p className="hero-tagline" aria-live="polite" key={heroTaglineIndex}>
-                <span>{heroTaglines[heroTaglineIndex]}</span>
+              <p className="hero-tagline">
+                <span>Build faster. Scale with confidence.</span>
               </p>
 
               <p className="hero-subtitle">
-                <span>Aivico builds modern web applications, AI products, automated SQA systems, and high-impact digital growth campaigns.</span>
+                <span>Aivico Tech builds modern web applications, AI products, automated SQA systems, and high-impact digital growth campaigns.</span>
               </p>
 
               <div className="hero-cta-group">
@@ -634,7 +614,7 @@ export default function App() {
 
             <div className="hero-visual-wrapper">
               <div className="hero-services-panel" ref={heroServicesPanelRef}>
-                <div className="hero-service-list" role="tablist" aria-label="Aivico services">
+                <div className="hero-service-list" role="tablist" aria-label="Aivico Tech services">
                   <div className="hero-panel-kicker">CAPABILITY INDEX // 01</div>
                   {serviceCatalog.map((service, index) => (
                     <button
@@ -1043,9 +1023,7 @@ export default function App() {
           <div className="footer-top">
             <div className="footer-brand">
               <a href="#top" className="brand-logo">
-                <span className="brand-icon">A</span>
-                <span>AIVICO</span>
-                <span className="dot">.</span>
+                <img className="brand-logo-image" src={aivicoTechLogo} alt="Aivico Tech" />
               </a>
               <p>
                 Professional software engineering studio specializing in Web Development, AI Products, SEO, SQA, Digital Marketing, and AI/ML Ops.
@@ -1079,8 +1057,9 @@ export default function App() {
               <ul>
                 <li>
                   <a
-                    href="mailto:hello@aivico.com"
+                    href="mailto:hello@aivico.com?subject=Aivico%20Tech%20Project%20Inquiry"
                     className="footer-email-link"
+                    aria-label="Email Aivico Tech"
                   >
                     hello@aivico.com ↗
                   </a>
@@ -1092,7 +1071,7 @@ export default function App() {
           </div>
 
           <div className="footer-bottom">
-            <span>© {new Date().getFullYear()} Aivico Technologies Inc. All rights reserved.</span>
+            <span>© {new Date().getFullYear()} Aivico Tech. All rights reserved.</span>
             <div className="footer-social-links">
               <a href="https://github.com" target="_blank" rel="noreferrer">GitHub</a>
               <a href="https://linkedin.com" target="_blank" rel="noreferrer">LinkedIn</a>
