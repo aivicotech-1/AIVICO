@@ -1,0 +1,10 @@
+.services-cycle-toggle {
+  display: block;
+  margin: 0 0 20px auto;
+  padding: 8px 12px;
+  color: var(--text-muted);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  font-size: 12px;
+}
+.services-cycle-toggle:hover { color: var(--text-main); border-color: var(--border-active); }

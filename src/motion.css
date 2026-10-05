@@ -1,0 +1,30 @@
+/* Native scrolling retains touch momentum, keyboard control and browser history. */
+html { scroll-padding-top: 100px; }
+section[id] { scroll-margin-top: 16px; }
+.project-row { position: relative; isolation: isolate; }
+.project-row::after {
+  content: ''; position: absolute; inset: 0; border-radius: 20px;
+  background: radial-gradient(280px circle at var(--spot-x, 50%) var(--spot-y, 50%), var(--border-glow), transparent 75%);
+  opacity: 0; pointer-events: none; transition: opacity .35s ease;
+}
+.project-row:hover::after { opacity: .65; }
+.project-image { transition: border-color .3s, box-shadow .3s, transform .6s cubic-bezier(.2,.8,.2,1); }
+.project-image img { transition: transform .8s cubic-bezier(.2,.8,.2,1); }
+.project-row:hover .project-image img { transform: scale(1.025); }
+.project-row.reveal-on-scroll { transition-duration: .85s; filter: none; }
+.service-card-btn .service-arrow { transition: transform .3s cubic-bezier(.2,.8,.2,1); }
+.service-card-btn:hover .service-arrow { transform: translate(4px,-4px); }
+:is(a, button, input, textarea, select):focus-visible { outline: 2px solid var(--accent-primary); outline-offset: 5px; }
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  :is(.btn-primary, .btn-secondary, .btn-nav-cta) { transition: transform .25s ease, box-shadow .25s ease, background .25s ease; }
+  :is(.btn-primary, .btn-secondary, .btn-nav-cta):hover { transform: translateY(-3px); box-shadow: var(--shadow-sm); }
+  :is(.btn-primary, .btn-secondary, .btn-nav-cta) svg { transition: transform .25s ease; }
+  :is(.btn-primary, .btn-secondary, .btn-nav-cta):hover svg { transform: translateX(3px); }
+  :is(.btn-primary, .btn-secondary, .btn-nav-cta):active { transform: translateY(0); }
+}
+@media (max-width: 760px) { html { scroll-padding-top: 80px; } }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto !important; }
+  .project-row::after { display: none; }
+  .project-row, .project-image, .project-image img { animation: none !important; transition: none !important; transform: none !important; }
+}

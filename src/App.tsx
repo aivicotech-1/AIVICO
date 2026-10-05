@@ -1,8 +1,8 @@
-import { useEffect, useRef, useState, type FormEvent } from 'react';
+import { useEffect, useState, type FormEvent } from 'react';
 import { TiltCard } from './components/TiltCard';
 import { TechStackExplorer } from './components/TechStackExplorer';
 import { TeamRow } from "./components/TeamRow";
-import { CaseStudies } from './components/CaseStudies';
+import { Projects } from './components/Projects';
 import aivicoTechLogo from './images/AivicoTechLogo.png';
 import {
   ArrowRight,
@@ -267,7 +267,7 @@ function SiteFooter() {
             <h4>Explore</h4>
             <ul>
               <li><a href="/#technologies">Technology Universe</a></li>
-              <li><a href="/#impact">Case Studies</a></li>
+              <li><a href="/#projects">Projects</a></li>
               <li><a href="/#process">Five-Step Process</a></li>
               <li><a href="/#faq">FAQ</a></li>
             </ul>
@@ -277,7 +277,14 @@ function SiteFooter() {
             <h4>Contact</h4>
             <ul>
               <li><a href="mailto:hello@aivico.com?subject=Aivico%20Tech%20Project%20Inquiry" className="footer-email-link" aria-label="Email Aivico Tech">hello@aivico.com ↗</a></li>
-              <li><span style={{ color: 'var(--text-dim)', fontSize: '13px' }}>NASTP (National Aerospace Science and Technology Park) <br /> Delta-4, Office 4030, Abid Majeed Road <br /> Lahore Cantt, Pakistan</span></li>
+              <li>
+                <span style={{ color: 'var(--text-dim)', fontSize: '13px' }}>
+                  NASTP (National Aerospace Science and Technology Park)<br />
+                  Delta-4, Office 4030, Abid Majeed Road<br />
+                  Lahore Cantt, Pakistan<br />
+                  <a href="tel:+923400071111" className="footer-phone-link">+92 340 0071111</a>
+                </span>
+              </li>
               <li><a href="/#contact" style={{ color: 'var(--accent-primary)', fontWeight: 600 }}>Start Project ↗</a></li>
             </ul>
           </div>
@@ -285,10 +292,19 @@ function SiteFooter() {
 
         <div className="footer-bottom">
           <span>© {new Date().getFullYear()} Aivico Tech. All rights reserved.</span>
-          <div className="footer-social-links">
-            <a href="https://github.com" target="_blank" rel="noreferrer">GitHub</a>
-            <a href="https://linkedin.com" target="_blank" rel="noreferrer">LinkedIn</a>
-            <a href="https://x.com" target="_blank" rel="noreferrer">X</a>
+          <div className="footer-social-links" aria-label="Social media links">
+            <a href="https://www.linkedin.com/in/aivico-tech/?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BoGsdDHJ7Qn6rjbSzis77fw%3D%3D" target="_blank" rel="noreferrer" aria-label="LinkedIn">
+              <img className="footer-linkedin-logo" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/linkedin.svg" alt="" />
+            </a>
+            <a href="https://instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram">
+              <img src="https://cdn.simpleicons.org/instagram/9ba1a6" alt="" />
+            </a>
+            <a href="https://facebook.com" target="_blank" rel="noreferrer" aria-label="Facebook">
+              <img src="https://cdn.simpleicons.org/facebook/9ba1a6" alt="" />
+            </a>
+            <a href="https://wa.me/923400071111" target="_blank" rel="noreferrer" aria-label="WhatsApp">
+              <img src="https://cdn.simpleicons.org/whatsapp/9ba1a6" alt="" />
+            </a>
           </div>
         </div>
       </div>
@@ -352,6 +368,16 @@ export default function App() {
     }
   });
   const [activeService, setActiveService] = useState(0);
+  const [servicesHovered, setServicesHovered] = useState(false);
+  const [servicesFocused, setServicesFocused] = useState(false);
+
+  useEffect(() => {
+    if (servicesHovered || servicesFocused) return;
+    const timer = window.setInterval(() => {
+      if (!document.hidden) setActiveService(index => (index + 1) % serviceCatalog.length);
+    }, 3000);
+    return () => window.clearInterval(timer);
+  }, [servicesHovered, servicesFocused, activeService]);
   const [activeStep, setActiveStep] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -360,19 +386,6 @@ export default function App() {
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
   const [heroHeadingIndex, setHeroHeadingIndex] = useState(0);
   const [heroHeadingVisible, setHeroHeadingVisible] = useState(true);
-  const heroServicesPanelRef = useRef<HTMLDivElement>(null);
-  const activeHeroServiceTabRef = useRef<HTMLButtonElement>(null);
-  const heroServiceDetailRef = useRef<HTMLDivElement>(null);
-  const [heroConnector, setHeroConnector] = useState<{
-    width: number;
-    height: number;
-    path: string;
-    startX: number;
-    startY: number;
-    endX: number;
-    endY: number;
-  } | null>(null);
-
   // Sync data-theme attribute and persist whenever theme changes
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
@@ -388,51 +401,11 @@ export default function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  useEffect(() => {
-    const updateHeroConnector = () => {
-      const panel = heroServicesPanelRef.current;
-      const tab = activeHeroServiceTabRef.current;
-      const detail = heroServiceDetailRef.current;
-      if (!panel || !tab || !detail) return;
 
-      const panelRect = panel.getBoundingClientRect();
-      const tabRect = tab.getBoundingClientRect();
-      const detailRect = detail.getBoundingClientRect();
-      const startX = tabRect.right - panelRect.left;
-      const startY = tabRect.top + tabRect.height / 2 - panelRect.top;
-      const endX = detailRect.left - panelRect.left;
-      const endY = detailRect.top + detailRect.height / 2 - panelRect.top;
-      const curveOffset = Math.max(14, (endX - startX) * 0.45);
-
-      setHeroConnector({
-        width: panelRect.width,
-        height: panelRect.height,
-        path: `M${startX} ${startY} C${startX + curveOffset} ${startY}, ${endX - curveOffset} ${endY}, ${endX} ${endY}`,
-        startX,
-        startY,
-        endX,
-        endY,
-      });
-    };
-
-    const frame = window.requestAnimationFrame(updateHeroConnector);
-    window.addEventListener('resize', updateHeroConnector);
-    return () => {
-      window.cancelAnimationFrame(frame);
-      window.removeEventListener('resize', updateHeroConnector);
-    };
-  }, [activeService]);
-
-  useEffect(() => {
-    const serviceTimer = window.setInterval(() => {
-      setActiveService((currentIndex) => (currentIndex + 1) % serviceCatalog.length);
-    }, 5200);
-
-    return () => window.clearInterval(serviceTimer);
-  }, []);
 
   useEffect(() => {
     let headingSwapTimeout: number | null = null;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const headingTimer = window.setInterval(() => {
       setHeroHeadingVisible(false);
       headingSwapTimeout = window.setTimeout(() => {
@@ -450,7 +423,7 @@ export default function App() {
   // Scroll reveal observer — covers all reveal variants
   useEffect(() => {
     const elements = document.querySelectorAll(
-      '.reveal-on-scroll, .reveal-left, .reveal-scale, .stagger-item'
+      '.reveal-on-scroll, .reveal-left, .reveal-right, .reveal-scale, .stagger-item'
     );
     const observer = new IntersectionObserver(
       (entries) => {
@@ -517,7 +490,7 @@ export default function App() {
           <nav className="desktop-nav" aria-label="Main Navigation">
             <a href="#services">Services</a>
             <a href="#technologies">Technologies</a>
-            <a href="#impact">Case Studies</a>
+            <a href="#projects">Projects</a>
             <a href="#process">Process</a>
             <a href="#faq">FAQ</a>
             <a href="/leadership">Leadership</a>
@@ -554,7 +527,7 @@ export default function App() {
       <div className={`mobile-drawer ${mobileMenuOpen ? 'open' : ''}`}>
         <a href="#services" onClick={() => setMobileMenuOpen(false)}>Services</a>
         <a href="#technologies" onClick={() => setMobileMenuOpen(false)}>Technologies</a>
-        <a href="#impact" onClick={() => setMobileMenuOpen(false)}>Case Studies</a>
+        <a href="#projects" onClick={() => setMobileMenuOpen(false)}>Projects</a>
         <a href="#process" onClick={() => setMobileMenuOpen(false)}>Process</a>
         <a href="#faq" onClick={() => setMobileMenuOpen(false)}>FAQ</a>
         <a href="/leadership" onClick={() => setMobileMenuOpen(false)}>Leadership</a>
@@ -599,55 +572,6 @@ export default function App() {
               </div>
             </div>
 
-            <div className="hero-visual-wrapper">
-              <div className="hero-services-panel" ref={heroServicesPanelRef}>
-                <div className="hero-service-list" role="tablist" aria-label="Aivico Tech services">
-                  <div className="hero-panel-kicker">CAPABILITY INDEX // 01</div>
-                  {serviceCatalog.map((service, index) => (
-                    <button
-                      key={service.id}
-                      type="button"
-                      role="tab"
-                      aria-selected={index === activeService}
-                      ref={index === activeService ? activeHeroServiceTabRef : undefined}
-                      className={`hero-service-tab ${index === activeService ? 'active' : ''}`}
-                      onClick={() => setActiveService(index)}
-                    >
-                      <span className="hero-service-tab-number">{service.num}</span>
-                      <span>{service.name}</span>
-                      <ArrowUpRight size={14} />
-                    </button>
-                  ))}
-                </div>
-
-                  {heroConnector && (
-                    <svg
-                      key={activeService}
-                      className="hero-service-connector"
-                      viewBox={`0 0 ${heroConnector.width} ${heroConnector.height}`}
-                      aria-hidden="true"
-                    >
-                      <path className="hero-service-connector-glow" d={heroConnector.path} />
-                      <path className="hero-service-connector-line" d={heroConnector.path} />
-                    </svg>
-                  )}
-
-                <div className="hero-service-detail" ref={heroServiceDetailRef} role="tabpanel">
-                  <span className="hero-panel-kicker">{currentService.category}</span>
-                  <h2>{currentService.name}</h2>
-                  <p>{currentService.fullDesc}</p>
-                  <div className="hero-service-features">
-                    {currentService.features.slice(0, 3).map((feature) => (
-                      <span key={feature}>{feature}</span>
-                    ))}
-                  </div>
-                  <span className="hero-service-status">
-                    <span className="hero-service-status-dot" />
-                    READY TO ENGINEER
-                  </span>
-                </div>
-              </div>
-            </div>
           </div>
         </section>
 
@@ -656,7 +580,7 @@ export default function App() {
           <div className="section-wrapper">
             <div className="section-header">
               <div className="section-shimmer-divider" />
-              <span className="section-label">Core Capabilities // 01</span>
+              <span className="section-label">Core Capabilities</span>
               <h2 className="section-title">
                 Our 6 specialized <span className="text-gradient">services.</span>
               </h2>
@@ -665,7 +589,13 @@ export default function App() {
               </p>
             </div>
 
-            <div className="services-layout">
+            <div className="services-layout"
+              onMouseEnter={() => setServicesHovered(true)}
+              onMouseLeave={() => setServicesHovered(false)}
+              onFocusCapture={() => setServicesFocused(true)}
+              onBlurCapture={event => {
+                if (!event.currentTarget.contains(event.relatedTarget)) setServicesFocused(false);
+              }}>
               {/* Service Tab Buttons */}
               <div className="services-nav-list" role="tablist">
                 {serviceCatalog.map((service, index) => (
@@ -698,7 +628,7 @@ export default function App() {
                     <span className="terminal-dot" />
                     <span className="terminal-dot" />
                   </div>
-                  <span className="mono">SERVICE // {currentService.name.toUpperCase()}</span>
+                  <span className="mono">{currentService.name}</span>
                 </div>
 
                 <div className="preview-body">
@@ -754,12 +684,12 @@ export default function App() {
           </div>
         </div>
 
-        {/* Technology Universe // 02 (Filtered by the 6 Services) */}
+        {/* Technology Universe (Filtered by the 6 Services) */}
         <section id="technologies" className="content-section reveal-on-scroll" style={{ background: 'var(--bg-secondary)' }}>
           <div className="section-wrapper">
             <div className="section-header">
               <div className="section-shimmer-divider" />
-              <span className="section-label">Technology Universe // 02</span>
+              <span className="section-label">Technology Universe</span>
               <h2 className="section-title">
                 The technical stack behind <span className="text-gradient">our 6 services.</span>
               </h2>
@@ -772,30 +702,14 @@ export default function App() {
           </div>
         </section>
 
-        {/* Case Studies / Proven Impact in the 6 Services */}
-        <section id="impact" className="content-section reveal-on-scroll">
-          <div className="section-wrapper">
-            <div className="section-header">
-              <div className="section-shimmer-divider" />
-              <span className="section-label">Proven Results // 03</span>
-              <h2 className="section-title">
-                Real impact across <span className="text-gradient">our core disciplines.</span>
-              </h2>
-              <p className="section-desc">
-                Delivering measurable client outcomes in Web Development, AI Products, SEO, and Quality Engineering.
-              </p>
-            </div>
-
-            <CaseStudies />
-          </div>
-        </section>
+        <Projects />
 
         {/* Process with Creston-Inspired Interactive Step Progress Slider */}
         <section id="process" className="content-section reveal-on-scroll" style={{ background: 'var(--bg-secondary)' }}>
           <div className="section-wrapper">
             <div className="section-header">
               <div className="section-shimmer-divider" />
-              <span className="section-label">Structured Process // 04</span>
+              <span className="section-label">Structured Process</span>
               <h2 className="section-title">
                 From discovery to launch in <span className="text-gradient">five clear steps.</span>
               </h2>
@@ -808,7 +722,7 @@ export default function App() {
               <div className="process-progress-bar-wrap">
                 <div
                   className="process-progress-fill"
-                  style={{ width: `${((activeStep + 1) / engineeringSteps.length) * 100}%` }}
+                  style={{ width: `${100 / engineeringSteps.length}%` }}
                 />
               </div>
 
@@ -845,7 +759,7 @@ export default function App() {
           <div className="section-wrapper">
             <div className="section-header center">
               <div className="section-shimmer-divider" style={{ margin: '0 auto 24px' }} />
-              <span className="section-label">FAQ // 05</span>
+              <span className="section-label">FAQ</span>
               <h2 className="section-title">
                 Frequently asked <span className="text-gradient">questions.</span>
               </h2>
@@ -1033,7 +947,7 @@ export default function App() {
               <h4>Explore</h4>
               <ul>
                 <li><a href="#technologies">Technology Universe</a></li>
-                <li><a href="#impact">Case Studies</a></li>
+                <li><a href="#projects">Projects</a></li>
                 <li><a href="#process">Five-Step Process</a></li>
                 <li><a href="#faq">FAQ</a></li>
               </ul>
@@ -1051,7 +965,14 @@ export default function App() {
                     hello@aivico.com ↗
                   </a>
                 </li>
-                <li><span style={{ color: 'var(--text-dim)', fontSize: '13px' }}>NASTP (National Aerospace Science and Technology Park) <br /> Delta-4, Office 4030, Abid Majeed Road <br /> Lahore Cantt, Pakistan</span></li>
+                <li>
+                  <span style={{ color: 'var(--text-dim)', fontSize: '13px' }}>
+                    NASTP (National Aerospace Science and Technology Park)<br />
+                    Delta-4, Office 4030, Abid Majeed Road<br />
+                    Lahore Cantt, Pakistan<br />
+                    <a href="tel:+923400071111" className="footer-phone-link">+92 340 0071111</a>
+                  </span>
+                </li>
                 <li><a href="#contact" style={{ color: 'var(--accent-primary)', fontWeight: 600 }}>Start Project ↗</a></li>
               </ul>
             </div>
@@ -1059,10 +980,19 @@ export default function App() {
 
           <div className="footer-bottom">
             <span>© {new Date().getFullYear()} Aivico Tech. All rights reserved.</span>
-            <div className="footer-social-links">
-              <a href="https://github.com" target="_blank" rel="noreferrer">GitHub</a>
-              <a href="https://linkedin.com" target="_blank" rel="noreferrer">LinkedIn</a>
-              <a href="https://x.com" target="_blank" rel="noreferrer">X</a>
+            <div className="footer-social-links" aria-label="Social media links">
+              <a href="https://linkedin.com" target="_blank" rel="noreferrer" aria-label="LinkedIn">
+                <img className="footer-linkedin-logo" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/linkedin.svg" alt="" />
+              </a>
+              <a href="https://instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram">
+                <img src="https://cdn.simpleicons.org/instagram/9ba1a6" alt="" />
+              </a>
+              <a href="https://facebook.com" target="_blank" rel="noreferrer" aria-label="Facebook">
+                <img src="https://cdn.simpleicons.org/facebook/9ba1a6" alt="" />
+              </a>
+              <a href="https://wa.me/923400071111" target="_blank" rel="noreferrer" aria-label="WhatsApp">
+                <img src="https://cdn.simpleicons.org/whatsapp/9ba1a6" alt="" />
+              </a>
             </div>
           </div>
         </div>
