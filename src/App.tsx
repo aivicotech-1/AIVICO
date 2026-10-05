@@ -913,11 +913,6 @@ export default function App() {
         </section>
       </main>
 
-       {/* Footer */}
-  <footer className="site-footer">
-    {/* …existing footer code… */}
-  </footer>
-
       {/* Footer */}
       <footer className="site-footer">
         <div className="section-wrapper">
