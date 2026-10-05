@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState, type FormEvent } from 'react';
-import confetti from 'canvas-confetti';
 import { TiltCard } from './components/TiltCard';
 import { TechStackExplorer } from './components/TechStackExplorer';
 import { TeamRow } from "./components/TeamRow";
@@ -494,21 +493,9 @@ export default function App() {
       }
 
       setStatus('sent');
-      confetti({
-        particleCount: 80,
-        spread: 70,
-        origin: { y: 0.6 },
-        colors: ['#34d399', '#a7f3d0', '#0f766e', '#ffffff'],
-      });
       e.currentTarget.reset();
     } catch {
       setStatus('sent');
-      confetti({
-        particleCount: 80,
-        spread: 70,
-        origin: { y: 0.6 },
-        colors: ['#34d399', '#a7f3d0', '#0f766e'],
-      });
     }
   };
 
