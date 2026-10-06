@@ -1,164 +1,72 @@
-# AIVICO — Enterprise AI & Full-Stack Web Development Studio
+# Aivico Tech Website
 
-> A state-of-the-art web application showcasing modern AI product development, high-performance web engineering, quiet-tech luxury aesthetics, and interactive 3D spatial visualizations.
+Company website built with **React, TypeScript, Vite, and plain CSS**, with a separate **Express + Nodemailer** contact API.
 
----
+## Run locally
 
-## 🌟 Overview
+Requires Node.js **22.12+** and npm.
 
-**AIVICO** is a modern enterprise digital studio application engineered for high impact. Designed with a **Quiet-Tech Luxury Aesthetic** (Warm Champagne, Platinum & Deep Obsidian), AIVICO balances architectural rigor with rich interactive motion—delivering sub-second load times, fluid micro-interactions, responsive grid systems, and a custom native 3D canvas experience without heavy 3D library overhead.
-
----
-
-## 🚀 Key Features & Interactive Architecture
-
-### 1. 🎨 Native Interactive 3D Canvas (`Hero3DCanvas.tsx`)
-- **Zero Heavy Bundle Overhead**: Built entirely with native HTML5 Canvas 2D Context API (no bulky Three.js or WebGL runtime dependencies).
-- **Mathematical Particle Ring Lattice**: Renders a multi-ring rotating 3D node lattice with dynamic connection lines and perspective depth calculations.
-- **Cursor Magnetic Interaction**: Particles dynamically respond to user cursor movement with spring physics and smooth vector lerping.
-- **Adaptive Light & Dark Palette**: Real-time canvas repainting that shifts palette schemes dynamically between Dark Velvet Obsidian and Light Alabaster Linen.
-
-### 2. ⚡ 6 Core Engineering Services
-Interactive tab explorer with live code preview blocks, terminal indicators, and breakdown lists:
-1. **Web Development**: Next.js 15 & React 19 Server Components, Custom SaaS Portals, REST & GraphQL APIs, Sub-second Core Web Vitals.
-2. **AI Product Development**: Autonomous Multi-Agent Swarms, Vector RAG Search Engines, Custom Copilots, and Factuality Guardrails.
-3. **SEO (Search Engine Optimization)**: Technical Crawl Audits, Structured Schema Graphs, Core Web Vitals, and Programmatic Content Architectures.
-4. **SQA (Software Quality Assurance)**: Continuous Playwright/Cypress Automation, Synthetic Load & Stress Testing, API Contract Defense.
-5. **Digital Marketing**: Data-Led Acquisition Campaigns, GA4/GTM Server Attribution, CRO & A/B Funnel Optimization.
-6. **AI/ML Ops**: High-Throughput vLLM & TensorRT Serving, Continuous Drift Telemetry, Containerized GPU Cluster Orchestration.
-
-### 3. 🛸 Technology Universe Explorer (`TechStackExplorer.tsx`)
-- Categorized technology catalog covering Web, AI, SEO, SQA, Marketing, and ML Ops.
-- Real-time search filtering by technology name, category, or technical specification.
-- Dynamic 3D tilt interaction cards (`TiltCard.tsx`) with ambient glowing borders.
-
-### 4. 🧮 Interactive Project Estimator (`ProjectEstimator.tsx`)
-- Real-time squad and budget range calculator.
-- Custom selection across Domain Types (AI, Web/SaaS, Cloud, Backend), Scale Rigor (MVP, Production, Enterprise), Velocity, and Accelerators (SQA, Observability, Security, SRE Support).
-
-### 5. 👥 Responsive Leadership & Team Showcase (`TeamRow.tsx`)
-- Side-by-side team portrait cards with aspect ratio preservation (`242 / 481`).
-- Accent border frames with hover zoom animations and descriptive role captions.
-
-### 6. 🌓 Dual Spatial Themes (Quiet-Tech Obsidian & Alabaster Linen)
-- Instant theme toggle between Dark Velvet Obsidian (`#0b0d10`) and Light Alabaster Linen (`#faf9f5`).
-- Complete CSS Custom Property token system enforcing AAA contrast and subtle glassmorphism (`backdrop-filter`).
-
----
-
-## 🛠 Tech Stack
-
-| Domain | Technology / Tool | Purpose |
-| :--- | :--- | :--- |
-| **Frontend Core** | React 19, TypeScript | Reactive UI components & strict type safety |
-| **Build Tooling** | Vite 8 | Instant HMR & optimized production bundling |
-| **Styling** | Vanilla CSS (CSS Variables) | Modern design tokens, responsive grids & keyframe animations |
-| **Icons** | Lucide React | Clean, minimalist SVG icon set |
-| **Visual Effects** | HTML5 Canvas 2D, Canvas Confetti | Native 3D particle lattice & interactive micro-celebrations |
-| **Backend API** | Node.js, Express.js | Contact form API endpoint & inquiry handler |
-| **Email Transport** | Nodemailer | Optional SMTP transmission for project inquiries |
-
----
-
-## 📁 Directory Structure
-
-```text
-AIVICO/
-├── public/                 # Static assets & favicon icons
-├── server/
-│   └── index.js            # Express API server for contact form & email transport
-├── src/
-│   ├── components/
-│   │   ├── CaseStudies.tsx         # Interactive case study metrics & navigation
-│   │   ├── Hero3DCanvas.tsx        # Native HTML5 Canvas 3D particle lattice
-│   │   ├── ProjectEstimator.tsx    # Live project scope & budget calculator
-│   │   ├── TeamRow.tsx             # Team leadership cards & image gallery
-│   │   ├── TechStackExplorer.tsx   # Filterable technology universe catalog
-│   │   └── TiltCard.tsx            # Mouse-following 3D card tilt wrapper
-│   ├── App.tsx             # Main application orchestrator & section composition
-│   ├── main.tsx            # React application root entry point
-│   ├── styles.css          # Core Quiet-Tech design system & responsive stylesheet
-│   └── vite-env.d.ts       # TypeScript environment declarations
-├── .env.example            # Environment variable template
-├── .gitignore              # Git ignore rules
-├── index.html              # HTML base document & font definitions
-├── package.json            # NPM dependencies & scripts
-├── tsconfig.json           # TypeScript configuration
-└── vite.config.ts          # Vite bundler configuration
+```sh
+npm ci
+npm run dev       # Frontend: use the localhost URL printed by Vite
 ```
 
----
+In a second terminal:
 
-## ⚙️ Installation & Local Setup
+```sh
+npm run server    # Contact API: localhost:3001
+```
 
-### Prerequisites
-- **Node.js**: `v18.0.0` or higher
-- **npm**: `v9.0.0` or higher
+Vite proxies `/api` to port 3001. To check the production build, run `npm run build`; use `npm run preview` to preview it. No test or lint scripts are currently configured.
 
-### Steps
+## What the website includes
 
-1. **Clone the Repository**:
-   ```bash
-   git clone https://github.com/your-org/aivico.git
-   cd aivico
-   ```
+- **Homepage `/`:** hero, Services, moving technology icons, searchable Technologies, Projects, Process, FAQ, contact form, and footer.
+- **Leadership `/leadership`:** team profiles. Routing uses a pathname check in `App.tsx`.
+- **Six services:** Web Development, AI Product Development, SEO, SQA, Digital Marketing, and AI/ML Ops. The selector rotates every **3 seconds**, pausing on hover or keyboard focus.
+- **Three projects:** Skill2Success, AIVICO, and Creston Biz, each with a description and local image.
+- **Themes and motion:** persistent light/dark toggle, scroll reveals, hover glows, card tilt, and smooth anchor scrolling. The current default is dark.
 
-2. **Install Dependencies**:
-   ```bash
-   npm install
-   ```
+## Where to make changes
 
-3. **Start the Development Server**:
-   ```bash
-   npm run dev
-   ```
-   Open `http://localhost:5173/` in your browser.
+| File | Responsibility |
+| --- | --- |
+| `src/App.tsx` | Main layout, navigation, service/process/FAQ content, theme state, contact form |
+| `src/components/Projects.tsx` | Project names, descriptions, and image imports |
+| `src/components/TechStackExplorer.tsx` | Technology catalog, categories, and search |
+| `src/components/TeamRow.tsx` | Leadership profiles |
+| `src/components/TiltCard.tsx` | Interactive card tilt and glow |
+| `src/images/` | Logos, project screenshots, and portraits |
+| `src/styles.css` | Base design system and responsive styles |
+| `src/layout-updates.css` | Layout, spacing, project, and logo overrides |
+| `src/motion.css` | Motion refinements and anchor offsets |
+| `server/index.js` | Contact validation and email delivery |
+| `index.html`, `public/` | Metadata, fonts, robots.txt, and sitemap |
 
-4. **Start the API Backend Server (Optional)**:
-   ```bash
-   npm run server
-   ```
-   Runs the Express server on `http://localhost:3001/` for handling contact submissions.
+Styles load through `src/main.tsx`; later stylesheets override earlier rules. `service-cycle.css` contains unused rotation-button styles. `CaseStudies.tsx`, `Hero3DCanvas.tsx`, and `ProjectEstimator.tsx` are retained legacy components, not displayed on the website.
 
-5. **Build for Production**:
-   ```bash
-   npm run build
-   ```
+## Contact API
 
-6. **Preview Production Build**:
-   ```bash
-   npm run preview
-   ```
+The form sends JSON to `POST /api/contact`. Required fields: `name`, `email`, and `message`. The backend also accepts `company`, `service`, and `timeline`.
 
----
+Create a root `.env` for email delivery (never commit credentials):
 
-## 🌐 Deployment & Environment Setup
-
-### Environment Variables (`.env`)
-Create a `.env` file in the root directory based on `.env.example`:
-
-```env
-# Server Configuration
+```dotenv
 PORT=3001
-
-# SMTP Email Configuration (Optional for production email sending)
 SMTP_HOST=smtp.gmail.com
 SMTP_PORT=587
-SMTP_USER=your-email@gmail.com
-SMTP_PASS=your-app-password
-RECIPIENT_EMAIL=contact@aivico.com
+SMTP_USER=your-sending-email
+SMTP_PASS=your-smtp-app-password
+INBOX_EMAIL=your-receiving-email
 ```
 
-> **Note**: If `.env` variables are not provided, the contact form automatically operates in **Demo Fallback Mode**, presenting interactive feedback to the user without failing or breaking.
+Without SMTP credentials, submissions are logged only; there is no database. SMTP uses port 587/STARTTLS by default.
 
-### Deploying to Vercel / Netlify
-1. Connect the repository to Vercel or Netlify.
-2. Build command: `npm run build`
-3. Output directory: `dist`
-4. The frontend is fully static and self-contained; API routes can be deployed as serverless functions or run alongside the Express server.
+**Before production:** fix the current success fallback—the frontend shows success on failed requests, and the server returns 202 even if email delivery fails. Also fix the asynchronous form reset, include the form's `timeline` in the request, escape email HTML inputs, and add abuse protection.
 
----
+## Deployment
 
-## 🛡️ License
-
-This project is licensed under the MIT License — feel free to use and customize for enterprise web applications.
+- **Frontend:** Vercel build command `npm run build`, output `dist`. The existing `vercel.json` provides the SPA fallback needed for `/leadership`.
+- **Backend:** deploy Express separately with `npm run server`, or implement a serverless contact endpoint. Route `/api/contact` before the SPA fallback. The Vite proxy works only in development; Vercel does not automatically deploy `server/index.js`.
+- Update the domain in `index.html`, `public/robots.txt`, and `public/sitemap.xml`, plus public contact/social links in `App.tsx`.
+- Check both themes, mobile layouts, keyboard interaction, and actual email delivery before release. Fonts and some icons load from external providers.
