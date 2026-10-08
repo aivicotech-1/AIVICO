@@ -54,12 +54,12 @@ export function Hero3DCanvas({ theme = 'dark' }: Hero3DCanvasProps) {
 
     const isDark = theme === 'dark';
 
-    // Graphite and jade technology palette with high contrast in both themes.
-    const mainNodeColor = isDark ? '#34d399' : '#047857';
-    const highlightNodeColor = isDark ? '#a7f3d0' : '#10b981';
-    const lineColor = isDark ? 'rgba(52, 211, 153, ' : 'rgba(4, 120, 87, ';
-    const packetColor = isDark ? '#ffffff' : '#12251f';
-    const orbitRingColor = isDark ? 'rgba(52, 211, 153, 0.12)' : 'rgba(4, 120, 87, 0.18)';
+    // Electric Sky Blue & Indigo palette — matches the main website design system.
+    const mainNodeColor = isDark ? '#38bdf8' : '#2563eb';
+    const highlightNodeColor = isDark ? '#7dd3fc' : '#3b82f6';
+    const lineColor = isDark ? 'rgba(56, 189, 248, ' : 'rgba(37, 99, 235, ';
+    const packetColor = isDark ? '#ffffff' : '#0f172a';
+    const orbitRingColor = isDark ? 'rgba(56, 189, 248, 0.12)' : 'rgba(37, 99, 235, 0.18)';
 
     // 38 3D spatial points
     const nodeCount = 38;
@@ -105,17 +105,17 @@ export function Hero3DCanvas({ theme = 'dark' }: Hero3DCanvasProps) {
 
       ctx.clearRect(0, 0, width, height);
 
-      // Dedicated backdrop fill to ensure perfect contrast in both light and dark modes
+      // Dedicated backdrop fill — deep obsidian slate for dark, crisp cool slate for light
       if (isDark) {
         const bgGrad = ctx.createRadialGradient(width / 2, height / 2, 50, width / 2, height / 2, Math.max(width, height) / 1.5);
-        bgGrad.addColorStop(0, '#19302a');
-        bgGrad.addColorStop(1, '#0d1715');
+        bgGrad.addColorStop(0, '#0d121c');
+        bgGrad.addColorStop(1, '#07090e');
         ctx.fillStyle = bgGrad;
       } else {
         // Cool white gradient for light mode
         const bgGrad = ctx.createRadialGradient(width / 2, height / 2, 60, width / 2, height / 2, Math.max(width, height) / 1.4);
-        bgGrad.addColorStop(0, '#f3f8f5');
-        bgGrad.addColorStop(1, '#d9eae2');
+        bgGrad.addColorStop(0, '#f1f5f9');
+        bgGrad.addColorStop(1, '#e2e8f0');
         ctx.fillStyle = bgGrad;
       }
       ctx.fillRect(0, 0, width, height);
@@ -238,7 +238,7 @@ export function Hero3DCanvas({ theme = 'dark' }: Hero3DCanvasProps) {
           ctx.arc(curX, curY, Math.max(1.8, 2.8 * pktScale), 0, Math.PI * 2);
           ctx.fillStyle = packetColor;
           if (isDark) {
-            ctx.shadowColor = '#34d399';
+            ctx.shadowColor = '#38bdf8';
             ctx.shadowBlur = 6;
           }
           ctx.fill();
@@ -257,8 +257,8 @@ export function Hero3DCanvas({ theme = 'dark' }: Hero3DCanvasProps) {
         ctx.beginPath();
         ctx.arc(p.px, p.py, currentRadius * 2.2, 0, Math.PI * 2);
         ctx.fillStyle = isDark
-          ? `rgba(216, 188, 138, ${0.14 * p.scale})`
-          : `rgba(87, 63, 29, ${0.12 * p.scale})`;
+          ? `rgba(56, 189, 248, ${0.14 * p.scale})`
+          : `rgba(37, 99, 235, ${0.12 * p.scale})`;
         ctx.fill();
 
         // Node Body
@@ -276,7 +276,7 @@ export function Hero3DCanvas({ theme = 'dark' }: Hero3DCanvasProps) {
         if (p.node.highlight) {
           ctx.beginPath();
           ctx.arc(p.px, p.py, Math.max(1, currentRadius * 0.4), 0, Math.PI * 2);
-          ctx.fillStyle = isDark ? '#ffffff' : '#f7f1e6';
+          ctx.fillStyle = isDark ? '#ffffff' : '#dbeafe';
           ctx.fill();
         }
       });

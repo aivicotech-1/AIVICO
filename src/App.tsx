@@ -4,6 +4,7 @@ import { TechStackExplorer } from './components/TechStackExplorer';
 import { TeamRow } from "./components/TeamRow";
 import { Projects } from './components/Projects';
 import aivicoTechLogo from './images/AivicoTechLogo.png';
+import aivicoTechLogoLight from './images/AivicoTechLogoLight.png';
 import {
   ArrowRight,
   ArrowUpRight,
@@ -248,14 +249,16 @@ const marqueeLogos = [
   { name: 'Vercel', src: 'https://cdn.simpleicons.org/vercel/34d399' },
 ];
 
-function SiteFooter() {
+function SiteFooter({ theme }: { theme?: 'light' | 'dark' }) {
+  const isLight = theme === 'light' || (typeof document !== 'undefined' && document.documentElement.dataset.theme === 'light');
+  const currentLogo = isLight ? aivicoTechLogoLight : aivicoTechLogo;
   return (
     <footer className="site-footer">
       <div className="section-wrapper">
         <div className="footer-top">
           <div className="footer-brand">
             <a href="/" className="brand-logo">
-              <img className="brand-logo-image" src={aivicoTechLogo} alt="Aivico Tech" />
+              <img className="brand-logo-image" src={currentLogo} alt="Aivico Tech" />
               <span className="dot">.</span>
             </a>
             <p>
@@ -319,12 +322,13 @@ function LeadershipPage({
   theme: 'light' | 'dark';
   setTheme: (theme: 'light' | 'dark') => void;
 }) {
+  const currentLogo = theme === 'light' ? aivicoTechLogoLight : aivicoTechLogo;
   return (
     <>
       <header className="site-header scrolled">
         <div className="header-container">
           <a href="/" className="brand-logo" aria-label="Aivico Tech Home">
-            <img className="brand-logo-image" src={aivicoTechLogo} alt="Aivico Tech" />
+            <img className="brand-logo-image" src={currentLogo} alt="Aivico Tech" />
           </a>
 
           <nav className="desktop-nav" aria-label="Main Navigation">
@@ -354,7 +358,7 @@ function LeadershipPage({
         <TeamRow />
       </main>
 
-      <SiteFooter />
+      <SiteFooter theme={theme} />
     </>
   );
 }
@@ -478,13 +482,15 @@ export default function App() {
 
   const currentService = serviceCatalog[activeService];
 
+  const currentLogo = theme === 'light' ? aivicoTechLogoLight : aivicoTechLogo;
+
   return (
     <>
       {/* Navigation Header */}
       <header className={`site-header ${scrolled ? 'scrolled' : ''}`}>
         <div className="header-container">
           <a href="#top" className="brand-logo" aria-label="Aivico Tech Home">
-            <img className="brand-logo-image" src={aivicoTechLogo} alt="Aivico Tech" />
+            <img className="brand-logo-image" src={currentLogo} alt="Aivico Tech" />
           </a>
 
           <nav className="desktop-nav" aria-label="Main Navigation">
@@ -919,7 +925,7 @@ export default function App() {
           <div className="footer-top">
             <div className="footer-brand">
               <a href="#top" className="brand-logo">
-                <img className="brand-logo-image" src={aivicoTechLogo} alt="Aivico Tech" />
+                <img className="brand-logo-image" src={currentLogo} alt="Aivico Tech" />
               </a>
               <p>
                 Professional software engineering studio specializing in Web Development, AI Products, SEO, SQA, Digital Marketing, and AI/ML Ops.
