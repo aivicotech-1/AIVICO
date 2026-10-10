@@ -34,6 +34,40 @@ html[data-theme='light'] .brand-logo-image {
 .project-image { min-height: 320px; background: var(--bg-secondary); display: flex; align-items: center; justify-content: center; padding: 12px; }
 .project-image img { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 12px; }
 .project-image-placeholder { min-height: 320px; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; color: var(--text-muted); }
+
+/* Keep each project's copy and image inside one continuous card. */
+.project-row {
+  gap: 0;
+  overflow: hidden;
+  border: 1px solid var(--border-strong);
+  border-radius: 20px;
+  background: var(--bg-card);
+  box-shadow: var(--shadow-sm);
+  transition: border-color .3s ease, box-shadow .3s ease, transform .3s var(--ease-out);
+}
+.project-copy, .project-image {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+.project-copy::before, .project-image::before { display: none; }
+.project-image { min-height: 0; padding: 0; overflow: hidden; }
+.project-image img { min-height: 320px; border-radius: 0; }
+.project-row:hover { border-color: var(--border-active); box-shadow: var(--shadow-md), 0 0 24px var(--border-glow); }
+.project-row:hover .project-copy, .project-row:hover .project-image { border-color: transparent; box-shadow: none; }
+
+/* Keep all six service descriptions visually aligned to the same card height. */
+.service-card-btn { min-height: 100px; align-items: center; }
+.service-btn-content { min-width: 0; }
+.service-btn-content p {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
 @media (max-width: 760px) {
   .hero-section .hero-content { min-width: 0; }
   .hero-section .hero-title { font-size: clamp(32px, 8vw, 58px); }
@@ -55,8 +89,13 @@ html[data-theme='light'] .brand-logo-image {
   #services.content-section { padding-bottom: 32px; }
   .marquee-container + section.content-section { padding-top: 32px; }
   #projects.content-section { padding-block: 40px; }
-  .project-row { grid-template-columns: 1fr; gap: 16px; }
-  .project-image, .project-image-placeholder { min-height: 240px; }
+  .project-row { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .project-copy { padding: clamp(22px, 6vw, 30px); }
+  .project-image { min-height: 0; }
+  .project-image img { height: auto; min-height: 0; max-height: min(75vw, 380px); object-fit: cover; }
+  .project-image-placeholder { min-height: 220px; }
+  .service-card-btn { min-height: 100px; }
+  .service-btn-content p { display: block; overflow: visible; }
 }
 
 @media (max-width: 480px) {
