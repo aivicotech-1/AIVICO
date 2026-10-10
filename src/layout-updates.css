@@ -37,6 +37,19 @@ html[data-theme='light'] .brand-logo-image {
 @media (max-width: 760px) {
   .hero-section .hero-content { min-width: 0; }
   .hero-section .hero-title { font-size: clamp(32px, 8vw, 58px); }
+  .hero-section .hero-title .hero-line {
+    max-width: 100%;
+    white-space: normal;
+    overflow-wrap: normal;
+    word-break: normal;
+    text-wrap: balance;
+  }
+  .section-wrapper { width: 100%; min-width: 0; padding-inline: 0; }
+  .section-header, .section-desc, .project-copy, .project-image,
+  .contact-grid > *, .footer-top > *, .universe-card { min-width: 0; }
+  .project-copy p, .hero-subtitle, .section-desc, .team-bio, .faq-answer,
+  .universe-tech-name, .universe-tech-desc { overflow-wrap: anywhere; }
+  .universe-grid { grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); }
   .hero-section .hero-cta-group { flex-wrap: wrap; }
   .marquee-container { margin-block: 0 20px; }
   #services.content-section { padding-bottom: 32px; }
@@ -44,4 +57,20 @@ html[data-theme='light'] .brand-logo-image {
   #projects.content-section { padding-block: 40px; }
   .project-row { grid-template-columns: 1fr; gap: 16px; }
   .project-image, .project-image-placeholder { min-height: 240px; }
+}
+
+@media (max-width: 480px) {
+  .hero-section .hero-title { min-height: 4.8em; }
+  .header-container { gap: 6px; }
+  .header-actions { flex: 0 0 auto; gap: 6px; }
+  .brand-logo { flex: 0 1 auto; min-width: 0; }
+  .brand-logo-image { max-width: 38vw; object-fit: contain; }
+  .btn-nav-cta { padding-inline: 11px; gap: 5px; white-space: nowrap; }
+}
+
+@media (max-width: 360px) {
+  .brand-logo-image { width: min(108px, 30vw); max-width: 30vw; }
+  .header-actions { gap: 4px; }
+  .btn-nav-cta { gap: 3px; padding: 8px; font-size: 10px; }
+  .btn-mobile-toggle { width: 44px; min-width: 44px; min-height: 44px; padding: 4px; }
 }
