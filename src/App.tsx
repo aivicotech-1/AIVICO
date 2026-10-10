@@ -259,7 +259,6 @@ function SiteFooter({ theme }: { theme?: 'light' | 'dark' }) {
           <div className="footer-brand">
             <a href="/" className="brand-logo">
               <img className="brand-logo-image" src={currentLogo} alt="Aivico Tech" />
-              <span className="dot">.</span>
             </a>
             <p>
               Professional software engineering studio specializing in Web Development, AI Products, SEO, SQA, Digital Marketing, and AI/ML Ops.
